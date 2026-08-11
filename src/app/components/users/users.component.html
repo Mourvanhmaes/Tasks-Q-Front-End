@@ -1,1 +1,83 @@
-<p>users works!</p>
+<div class="users-page">
+
+  <div class="card">
+    <h2>Criar usuário</h2>
+
+    <label>Nome</label>
+    <input
+      type="text"
+      [(ngModel)]="novoUsuario.name"
+      placeholder="Digite o nome"
+    >
+
+    <label>Email</label>
+    <input
+      type="email"
+      [(ngModel)]="novoUsuario.email"
+      placeholder="Digite o email"
+    >
+
+    <label>Senha</label>
+    <input
+      type="password"
+      [(ngModel)]="novoUsuario.password"
+      placeholder="Digite a senha"
+    >
+
+    <label>Cargo</label>
+    <input
+      type="text"
+      [(ngModel)]="novoUsuario.cargo"
+      placeholder="Digite o cargo"
+    >
+
+    <label>Status</label>
+    <select [(ngModel)]="novoUsuario.status">
+      <option value="Ativo">Ativo</option>
+      <option value="Inativo">Inativo</option>
+    </select>
+
+    <button (click)="salvarUsuario()">
+      Salvar usuário
+    </button>
+  </div>
+
+
+  <div class="card">
+    <h2>Lista de usuários</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Cargo</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.id }}</td>
+          <td>{{ usuario.name }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.cargo }}</td>
+          <td>{{ usuario.status }}</td>
+
+          <td>
+            <button>
+              Editar
+            </button>
+
+            <button (click)="excluirUsuario(usuario.id)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
