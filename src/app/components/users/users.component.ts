@@ -31,15 +31,24 @@ export class UsersComponent {
     status: 'Ativo'
   };
 
+  usuarioEditandoid: number | null = null;
+
   salvarUsuario() {
-    this.novoUsuario.id = this.usuarios.length + 1;
 
-    this.usuarios.push({
-      ...this.novoUsuario
-    });
+    if(this.usuarioEditandoid === null){
+          this.novoUsuario.id = this.usuarios.length + 1;
 
-    this.limparFormulario();
-  }
+          this.usuarios.push({
+            ...this.novoUsuario
+          });
+
+          this.limparFormulario();
+        }else{
+            const indice = this.usuarios.findIndex(u => u.id === this.usuarioEditandoid);
+            this.usuarios[indice] ={ ...this.novoUsuario};
+          
+        }
+      }
 
   excluirUsuario(id: number) {
     this.usuarios = this.usuarios.filter(
@@ -57,5 +66,15 @@ export class UsersComponent {
       status: 'Ativo'
     };
   }
+  editarUsuario(usuario: any){
+      this.novoUsuario ={
+          ...usuario
+      };
+      this.usuarioEditandoid = usuario.id;
+  }
+  cancelarEdicao() {
+  this.usuarioEditandoid = null;
+  this.limparFormulario();
+}
 
 }
