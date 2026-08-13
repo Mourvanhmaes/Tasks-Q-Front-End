@@ -10,12 +10,15 @@ enum Prioridade{
 }
 
 interface Tasks{
+  id: number;
   titulo: string;
   descricao: string;
   prioridade: Prioridade;
   prazo: string;
   usuarioDestino: string;
 }
+
+let contador = 1;
 
 @Component({
   selector: 'app-tasks',
@@ -27,17 +30,31 @@ interface Tasks{
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent {
-
     Prioridade = Prioridade;
     tasks: Tasks = {
+      id: 0,
       titulo: '',
       descricao: '',
       prioridade: Prioridade.ALTA,
       prazo: '',
       usuarioDestino: ''
     };
-
+    
+    lista: Tasks[] = [      ];
+    
+    
     cadastrarTask(){
-      console.log(this.tasks)
+      this.tasks.id = contador;
+      this.lista.push(this.tasks);
+      console.log(this.lista[contador - 1]);
+      contador++;
+      this.tasks = {
+        id: 0,
+        titulo: '',
+        descricao: '',
+        prioridade: Prioridade.ALTA,
+        prazo: '',
+        usuarioDestino: ''
+      };
     }
 }

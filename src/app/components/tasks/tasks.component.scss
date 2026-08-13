@@ -18,6 +18,24 @@
     gap: 1rem;
 }
 
-.cards-lista .card{
-    height: 18rem;
+.cards-lista{
+    .card{
+        height: 18rem;
+    }
+
+    p{
+        height: 4rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+
+    }
+    .card-null{
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        opacity: 50%;
+    }
 }

@@ -51,7 +51,7 @@
             <br>
             <br>
             <mdb-form-control>
-                <input mdbInput type="text" id="tasksData" class="form-control" [(ngModel)]='tasks.prazo' />
+                <input mdbInput type="date" id="tasksData" class="form-control" [(ngModel)]="tasks.prazo" />
                 <label mdbLabel class="form-label" for="tasksData">Prazo</label>
             </mdb-form-control>
             <br>
@@ -64,36 +64,22 @@
         </div>
     </div>
     <div class="cards-lista">
-        <div class="card bg-danger bg-opacity-25" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Tarefa Limpeza</h5>
-                <h6 class="card-subtitle mb-3 text-danger">09/10/2026</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
-                <button class="btn btn-danger me-4 ms-2">Deletar</button>
-                <button class="btn btn-warning">Alterar</button>
+        @if (lista.length === 0) {
+            <div class="card-null">Sem tarefa cadastrada</div>
+        }
+        @for (tasks of lista; track tasks.id) {
+            <div class="card bg-opacity-25" style="width: 18rem;" [class.bg-danger]="tasks.prioridade === Prioridade.ALTA" [class.bg-warning]="tasks.prioridade === Prioridade.MEDIA" [class.bg-info]="tasks.prioridade === Prioridade.BAIXA">
+                <div class="card-body">
+                    <h5 class="card-title">{{tasks.titulo}}</h5>
+                    <h6 class="card-subtitle mb-3 text-danger">{{tasks.prazo}}</h6>
+                    <p class="card-text">{{tasks.descricao}}</p>
+                    <h6 class="card-subtitle mt-3">Destino: <span>{{tasks.usuarioDestino}}</span></h6>
+                    <h6 class="card-subtitle mb-4 mt-1">Criado por: <span>Pedro Silva</span></h6>
+                    <button class="btn btn-danger me-4 ms-2">Deletar</button>
+                    <button class="btn btn-warning">Alterar</button>
+                </div>
             </div>
-        </div>
-        <div class="card bg-warning bg-opacity-25" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Tarefa Limpeza</h5>
-                <h6 class="card-subtitle mb-3 text-warning">09/10/2026</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
-                <button class="btn btn-danger me-4 ms-2">Deletar</button>
-                <button class="btn btn-warning">Alterar</button>
-            </div>
-        </div>
-        <div class="card bg-info bg-opacity-25" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Tarefa Limpeza</h5>
-                <h6 class="card-subtitle mb-3 text-primary">09/10/2026</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
-                <button class="btn btn-danger me-4 ms-2">Deletar</button>
-                <button class="btn btn-warning">Alterar</button>
-            </div>
-        </div>
+        }
     </div>
 
 </div>
