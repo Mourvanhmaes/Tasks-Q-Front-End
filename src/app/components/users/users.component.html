@@ -40,6 +40,10 @@
     <button (click)="salvarUsuario()">
       Salvar usuário
     </button>
+    <button *ngIf="usuarioEditandoid !== null" (click)="cancelarEdicao()">
+              Cancelar Edição
+    </button>
+
   </div>
 
 
@@ -67,7 +71,7 @@
           <td>{{ usuario.status }}</td>
 
           <td>
-            <button>
+            <button (click)= "editarUsuario(usuario)">
               Editar
             </button>
 
