@@ -1,1 +1,99 @@
-<p>tasks works!</p>
+<div class="container mt-4">
+    <div class="card card-cadastro">
+        <div class="card-body">
+            <h5 class="card-title">Cadatro de Tarefas</h5>
+            <mdb-form-control>
+                <input mdbInput type="text" id="taskTitulo" class="form-control" [(ngModel)]='tasks.titulo' />
+                <label mdbLabel class="form-label" for="taskTitulo">Titulo</label>
+            </mdb-form-control>
+            <br>
+            <mdb-form-control>
+                <textarea mdbInput class="form-control" id="taskDescricao" rows="4" [(ngModel)]='tasks.descricao'></textarea>
+                <label mdbLabel class="form-label" for="taskDescricao">Descrição</label>
+            </mdb-form-control>
+            <br>
+            <p>Prioridade: </p>
+            <div class="btn-group">
+                <input
+                    mdbRadio
+                    type="radio"
+                    class="btn-check"
+                    name="options"
+                    id="taskPrioridadeAlta"
+                    autocomplete="off"
+                    [value]="Prioridade.ALTA"
+                    [(ngModel)]='tasks.prioridade'
+                />
+                <label class="btn btn-secondary" for="taskPrioridadeAlta">Alta</label>
+                <input
+                    mdbRadio
+                    type="radio"
+                    class="btn-check"
+                    name="options"
+                    id="taskPrioridadeMedia"
+                    autocomplete="off"
+                    [value]="Prioridade.MEDIA"
+                    [(ngModel)]='tasks.prioridade'
+                />
+                <label class="btn btn-secondary" for="taskPrioridadeMedia">Media</label>
+                <input
+                    mdbRadio
+                    type="radio"
+                    class="btn-check"
+                    name="options"
+                    id="taskPrioridadeBaixa"
+                    autocomplete="off"
+                    [value]="Prioridade.BAIXA"
+                    [(ngModel)]='tasks.prioridade'
+                />
+                <label class="btn btn-secondary" for="taskPrioridadeBaixa">Baixa</label>
+            </div>
+            <br>
+            <br>
+            <mdb-form-control>
+                <input mdbInput type="text" id="tasksData" class="form-control" [(ngModel)]='tasks.prazo' />
+                <label mdbLabel class="form-label" for="tasksData">Prazo</label>
+            </mdb-form-control>
+            <br>
+            <mdb-form-control>
+                <input mdbInput type="text" id="tasksUser" class="form-control" [(ngModel)]='tasks.usuarioDestino'/>
+                <label mdbLabel class="form-label" for="tasksUser">Usuario Destino</label>
+            </mdb-form-control>
+            <br>
+            <button type="button" class="btn btn-primary" (click)="cadastrarTask()" >Cadastrar</button>
+        </div>
+    </div>
+    <div class="cards-lista">
+        <div class="card bg-danger bg-opacity-25" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Tarefa Limpeza</h5>
+                <h6 class="card-subtitle mb-3 text-danger">09/10/2026</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
+                <button class="btn btn-danger me-4 ms-2">Deletar</button>
+                <button class="btn btn-warning">Alterar</button>
+            </div>
+        </div>
+        <div class="card bg-warning bg-opacity-25" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Tarefa Limpeza</h5>
+                <h6 class="card-subtitle mb-3 text-warning">09/10/2026</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
+                <button class="btn btn-danger me-4 ms-2">Deletar</button>
+                <button class="btn btn-warning">Alterar</button>
+            </div>
+        </div>
+        <div class="card bg-info bg-opacity-25" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Tarefa Limpeza</h5>
+                <h6 class="card-subtitle mb-3 text-primary">09/10/2026</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h6 class="card-subtitle mb-4 mt-3">Destino: <span>Igor Silva</span></h6>
+                <button class="btn btn-danger me-4 ms-2">Deletar</button>
+                <button class="btn btn-warning">Alterar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
