@@ -1,1 +1,72 @@
-<p>tasks works!</p>
+<div class="container mt-4">
+  <div class="card card-cadastro">
+    <div class="card-body">
+      <h5 class="card-title mb-3">{{ taskEmEdicaoId === null ? 'Cadastro de tarefas' : 'Atualizar tarefa' }}</h5>
+
+      <mdb-form-control>
+        <input mdbInput type="text" id="taskTitulo" class="form-control" [(ngModel)]="task.titulo" />
+        <label mdbLabel class="form-label" for="taskTitulo">Título</label>
+      </mdb-form-control>
+      <br />
+
+      <mdb-form-control>
+        <textarea mdbInput class="form-control" id="taskDescricao" rows="4" [(ngModel)]="task.descricao"></textarea>
+        <label mdbLabel class="form-label" for="taskDescricao">Descrição</label>
+      </mdb-form-control>
+      <br />
+
+      <p>Prioridade:</p>
+      <div class="btn-group">
+        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeAlta" autocomplete="off" [value]="Prioridade.ALTA" [(ngModel)]="task.prioridade" />
+        <label class="btn btn-secondary" for="taskPrioridadeAlta">Alta</label>
+        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeMedia" autocomplete="off" [value]="Prioridade.MEDIA" [(ngModel)]="task.prioridade" />
+        <label class="btn btn-secondary" for="taskPrioridadeMedia">Média</label>
+        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeBaixa" autocomplete="off" [value]="Prioridade.BAIXA" [(ngModel)]="task.prioridade" />
+        <label class="btn btn-secondary" for="taskPrioridadeBaixa">Baixa</label>
+      </div>
+      <br /><br />
+
+      <mdb-form-control>
+        <input mdbInput type="date" id="tasksData" class="form-control" [(ngModel)]="task.prazo" />
+        <label mdbLabel class="form-label" for="tasksData">Prazo</label>
+      </mdb-form-control>
+      <br />
+
+      <mdb-form-control>
+        <input mdbInput type="text" id="tasksUser" class="form-control" [(ngModel)]="task.usuarioDestino" />
+        <label mdbLabel class="form-label" for="tasksUser">Usuário destino</label>
+      </mdb-form-control>
+      <br />
+
+      @if (mensagemErro) {
+        <div class="alert alert-danger py-2" role="alert">{{ mensagemErro }}</div>
+      }
+
+      <button type="button" class="btn btn-primary btn-block" (click)="salvarTask()">
+        {{ taskEmEdicaoId === null ? 'Cadastrar' : 'Atualizar' }}
+      </button>
+      @if (taskEmEdicaoId !== null) {
+        <button type="button" class="btn btn-outline-secondary btn-block mt-2" (click)="cancelarEdicao()">Cancelar</button>
+      }
+    </div>
+  </div>
+
+  <div class="cards-lista">
+    @if (lista.length === 0) {
+      <div class="card-null">Sem tarefas cadastradas</div>
+    }
+    @for (taskDaLista of lista; track taskDaLista.id) {
+      <div class="card bg-opacity-25 shadow" style="width: 18rem;" [class.bg-danger]="taskDaLista.prioridade === Prioridade.ALTA" [class.bg-warning]="taskDaLista.prioridade === Prioridade.MEDIA" [class.bg-info]="taskDaLista.prioridade === Prioridade.BAIXA">
+        <div class="card-body">
+          <h5 class="card-title">{{ taskDaLista.titulo }}</h5>
+          <h6 class="card-subtitle mb-3 text-danger">{{ taskDaLista.prazo }}</h6>
+          <p class="card-text">{{ taskDaLista.descricao }}</p>
+          <h6 class="card-subtitle mt-3">Destino: <span>{{ taskDaLista.usuarioDestino }}</span></h6>
+          <h6 class="card-subtitle mb-4 mt-1">Criado por: <span>Pedro Silva</span></h6>
+          <button type="button" class="btn btn-danger me-2" (click)="excluirTask(taskDaLista.id)">Excluir</button>
+          <button type="button" class="btn btn-warning" (click)="editarTask(taskDaLista)">Alterar</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
