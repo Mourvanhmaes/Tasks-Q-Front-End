@@ -45,16 +45,22 @@ export class TasksComponent {
     
     cadastrarTask(){
       this.tasks.id = contador;
-      this.lista.push(this.tasks);
-      console.log(this.lista[contador - 1]);
-      contador++;
-      this.tasks = {
-        id: 0,
-        titulo: '',
-        descricao: '',
-        prioridade: Prioridade.ALTA,
-        prazo: '',
-        usuarioDestino: ''
-      };
+      if(this.tasks.titulo == '' || this.tasks.descricao == '' || this.tasks.prazo ==  '' || this.tasks.descricao == '' ){
+        alert("Dados do formulario incompletos!!");
+      }
+      else{
+        this.lista.push(this.tasks);
+        console.log(this.lista[contador - 1]);
+        contador++;
+        this.tasks = {
+          id: 0,
+          titulo: '',
+          descricao: '',
+          prioridade: Prioridade.ALTA,
+          prazo: '',
+          usuarioDestino: ''
+        };
+      }
+
     }
 }
