@@ -1,0 +1,26 @@
+<main class="login-page">
+  <section class="card login-card shadow-5-strong">
+    <div class="card-body p-4 p-md-5">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-2">Bem-vindo</h1>
+        <p class="text-muted mb-0">Entre para gerenciar suas tarefas.</p>
+      </div>
+
+      <mdb-form-control class="mb-4">
+        <input mdbInput id="loginEmail" type="email" class="form-control" [(ngModel)]="email" />
+        <label mdbLabel class="form-label" for="loginEmail">E-mail</label>
+      </mdb-form-control>
+
+      <mdb-form-control class="mb-3">
+        <input mdbInput id="loginSenha" type="password" class="form-control" [(ngModel)]="senha" />
+        <label mdbLabel class="form-label" for="loginSenha">Senha</label>
+      </mdb-form-control>
+
+      @if (mensagemErro) {
+        <div class="alert alert-danger py-2" role="alert">{{ mensagemErro }}</div>
+      }
+
+      <button type="button" class="btn btn-primary btn-block" (click)="entrar()">Entrar</button>
+    </div>
+  </section>
+</main>
