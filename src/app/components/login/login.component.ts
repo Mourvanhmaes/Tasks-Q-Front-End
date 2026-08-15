@@ -23,6 +23,6 @@ export class LoginComponent {
     }
 
     this.mensagemErro = '';
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/admin/tasks']);
   }
 }
