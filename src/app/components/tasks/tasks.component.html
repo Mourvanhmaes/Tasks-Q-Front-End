@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <div class="card card-cadastro">
+  <div class="card card-cadastro" [class.card-atualizar]="taskEmEdicaoId !== null">
     <div class="card-body">
       <h5 class="card-title mb-3">{{ taskEmEdicaoId === null ? 'Cadastro de tarefas' : 'Atualizar tarefa' }}</h5>
 

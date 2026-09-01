@@ -1,63 +1,182 @@
-<<<<<<< HEAD
-# TasksQ
+# Task-Q | Front-End
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+Front-end do **Task-Q**, uma plataforma de gerenciamento de tarefas e organização de equipes desenvolvida com **Angular**.
 
-## Development server
+O projeto tem como objetivo centralizar a criação, acompanhamento e gerenciamento de tarefas, oferecendo uma interface organizada e intuitiva para controle das atividades de usuários e equipes.
 
-To start a local development server, run:
+## 🚀 Tecnologias
+
+- **Angular**
+- **TypeScript**
+- **HTML5**
+- **SCSS**
+- **Bootstrap**
+- **Node.js / NPM**
+- **Git & GitHub**
+
+## 📋 Funcionalidades
+
+Atualmente, o projeto contempla funcionalidades como:
+
+- Cadastro de tarefas
+- Listagem de tarefas
+- Edição de tarefas
+- Exclusão de tarefas
+- Gerenciamento de status das tarefas
+- Definição de prioridade
+- Gerenciamento de usuários
+- Interface responsiva
+- Navegação entre componentes
+
+Outras funcionalidades serão adicionadas conforme a evolução do projeto.
+
+## 🧩 Estrutura do projeto
+
+```text
+src/
+├── app/
+│   ├── components/
+│   │   ├── tasks/
+│   │   └── users/
+│   ├── app.component.html
+│   ├── app.component.scss
+│   ├── app.component.ts
+│   ├── app.config.ts
+│   └── app.routes.ts
+│
+├── index.html
+├── main.ts
+└── styles.scss
+```
+
+## ⚙️ Pré-requisitos
+
+Antes de executar o projeto, tenha instalado:
+
+- Node.js
+- NPM
+- Angular CLI
+- Git
+
+Para verificar as instalações:
+
+```bash
+node --version
+npm --version
+ng version
+git --version
+```
+
+## 📦 Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/Mourvanhmaes/Tasks-Q-Front-End.git
+```
+
+Entre na pasta:
+
+```bash
+cd Tasks-Q-Front-End
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+## ▶️ Executando o projeto
+
+Execute:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+ou:
 
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Após iniciar o servidor, acesse a aplicação pelo endereço exibido pelo Angular no terminal, normalmente:
 
-```bash
-ng generate --help
+```text
+http://localhost:4200
 ```
 
-## Building
+O Angular atualizará automaticamente a aplicação quando alterações forem realizadas no código.
 
-To build the project run:
+## 🔗 Back-End
 
-```bash
-ng build
+O Task-Q utiliza uma API desenvolvida separadamente com **Java e Spring Boot**.
+
+Principais tecnologias do back-end:
+
+- Java
+- Spring Boot
+- Spring Data JPA
+- API REST
+- MySQL
+
+## 🌿 Organização das branches
+
+O desenvolvimento utiliza branches separadas para implementação de funcionalidades.
+
+Exemplos:
+
+```text
+develop
+feature/tasks-crud
+feature/users-crud
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+O objetivo é manter cada funcionalidade isolada durante o desenvolvimento e integrá-la posteriormente à branch principal de desenvolvimento.
 
-## Running unit tests
+## 📝 Padrão de commits
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+O projeto utiliza mensagens de commit descritivas seguindo um padrão semelhante ao **Conventional Commits**:
 
-```bash
-ng test
+```text
+feat: adiciona cadastro de tarefas
+fix: corrige edição de tarefas
+style: ajusta estilização dos cards
+refactor: reorganiza lógica do componente
+docs: atualiza documentação
 ```
 
-## Running end-to-end tests
+Principais tipos:
 
-For end-to-end (e2e) testing, run:
+| Tipo | Utilização |
+|---|---|
+| `feat` | Nova funcionalidade |
+| `fix` | Correção de bug |
+| `style` | Alterações visuais/formatação |
+| `refactor` | Refatoração sem alterar comportamento |
+| `docs` | Documentação |
+| `chore` | Configurações e manutenção |
 
-```bash
-ng e2e
-```
+## 🎯 Objetivo acadêmico
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+O Task-Q está sendo desenvolvido como projeto acadêmico com foco na aplicação prática dos conceitos de **desenvolvimento Full Stack**, utilizando Angular no front-end e Java com Spring Boot no back-end.
 
-## Additional Resources
+O projeto busca aplicar conceitos como:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-=======
-# Tasks-Q
->>>>>>> 2c0f4417e0a51c0415831e801435ed2bb0119e3e
+- Componentização
+- CRUD
+- Modelagem de dados
+- APIs REST
+- Integração Front-End e Back-End
+- Organização de código
+- Controle de versão
+- Desenvolvimento colaborativo
+
+## 👥 Equipe
+
+Projeto desenvolvido em equipe como parte das atividades acadêmicas do curso de **Engenharia de Software**.
+
+## 📄 Licença
+
+Consulte o arquivo `LICENSE` presente no repositório para informações sobre a licença do projeto.
