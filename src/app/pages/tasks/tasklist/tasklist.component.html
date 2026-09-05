@@ -10,7 +10,7 @@
             A fazer
         </button>
     </div>
-    <button type="button" class="btn btn-primary" mdbRipple>Novo</button>
+    <button type="button" class="btn btn-primary" mdbRipple (click)="novo()">Novo</button>
 </div>
 <br>
 <main>
@@ -30,7 +30,43 @@
             <div class="cads-button text-center">
             <button type="button" class="btn btn-primary">Detalhes</button>
             </div>
-
         </div>
     </div>
+    @for (task of tasks; track task.id) {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-4">{{task.title}}</h5>
+                <p class="card-text">
+                    {{task.description}}
+                </p>
+                <div class="card-descricao">
+                    <p><b>Destino: </b>{{task.assigneeId}}</p>
+                    <p><b>Criando em: </b>{{task.createdAt}}</p>
+                    <p><b>Prazo: </b>{{task.deadLine}}</p>
+                    <p><b>Criado por: </b>{{task.creatorId}}</p>
+                </div>
+                <div class="cads-button text-center">
+                <button type="button" class="btn btn-primary">Detalhes</button>
+                </div>
+            </div>
+        </div>
+    }
 </main>
+
+
+<ng-template #modalTasks>
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Tasks</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+    <app-taskdetails
+        (retorno)="retornoDetalhe($event)"
+    ></app-taskdetails>
+</div>
+</ng-template>

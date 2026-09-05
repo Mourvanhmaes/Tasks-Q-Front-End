@@ -1,0 +1,51 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Cadastrar nova Tarefa</h3>
+                    <br>
+
+                     <mdb-form-control>
+                        <input mdbInput type="text" id="title" class="form-control mb-3" [(ngModel)]='task.title'/>
+                        <label mdbLabel class="form-label" for="title">Titulo</label>
+                    </mdb-form-control>
+                    <mdb-form-control>
+                        <textarea mdbInput class="form-control" id="description" rows="4" [(ngModel)]='task.description'></textarea>
+                        <label mdbLabel class="form-label" for="description">Descrição</label>
+                    </mdb-form-control>
+                    <br>
+                    <p>Prioridade:</p>
+                    <div class="btn-group">
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeAlta" autocomplete="off" [value]="Priority.ALTA" [(ngModel)]="task.priority" />
+                        <label class="btn btn-secondary" for="taskPrioridadeAlta">Alta</label>
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeMedia" autocomplete="off" [value]="Priority.MEDIA" [(ngModel)]="task.priority" />
+                        <label class="btn btn-secondary" for="taskPrioridadeMedia">Média</label>
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeBaixa" autocomplete="off" [value]="Priority.BAIXA" [(ngModel)]="task.priority" />
+                        <label class="btn btn-secondary" for="taskPrioridadeBaixa">Baixa</label>
+                    </div>
+                    <br /><br/>
+                    <mdb-form-control>
+                        <input mdbInput type="date" id="deadLine" class="form-control" [(ngModel)]="task.deadLine" />
+                        <label mdbLabel class="form-label" for="deadLine">Prazo</label>
+                    </mdb-form-control>
+                    <br />
+                    <mdb-form-control>
+                        <select mdbInput id="assignee" class="form-control mb-3" [(ngModel)]="task.assigneeId">
+                            <option [ngValue]="null">Selecione uma colaborador</option>
+                            <!-- @for (user of users; track user.id) {
+                                <option [ngValue]="marca">{{ user.name }}</option>
+                            } -->
+                        </select>
+                        <label mdbLabel class="form-label" for="assignee">Colaborador</label>
+                    </mdb-form-control>
+
+                    <br>
+
+                     <button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
