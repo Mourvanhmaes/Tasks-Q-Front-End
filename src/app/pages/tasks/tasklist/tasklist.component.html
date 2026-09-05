@@ -1,19 +1,21 @@
 <div class="nav-tasks">
-    <div class="btn-group shadow-0" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-secondary bg-success" rippleColor="dark">
+    <div class="btn-guias">
+        <button type="button" class="btn-task-guia">
+            Todos
+        </button>
+        <button type="button" class="btn-task-guia btn-guia-select">
             Andamento
         </button>
-        <button type="button" class="btn btn-outline-secondary bg-danger" rippleColor="dark">
-            Atrazadas
+        <button type="button" class="btn-task-guia ">
+            Atrasadas
         </button>
-        <button type="button" class="btn btn-outline-secondary bg-warning" rippleColor="dark">
-            A fazer
+        <button type="button" class="btn-task-guia">
+            Pendente
         </button>
     </div>
-    <button type="button" class="btn btn-primary" mdbRipple (click)="novo()">Novo</button>
 </div>
 <br>
-<main>
+<main class="main-card">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center mb-4">Organizar Pastas</h5>
@@ -53,6 +55,7 @@
     }
 </main>
 
+<button type="button" class="btn-tasks-new" mdbRipple (click)="novo()">+</button>
 
 <ng-template #modalTasks>
     <div class="modal-header">

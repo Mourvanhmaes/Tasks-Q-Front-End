@@ -3,14 +3,10 @@
     justify-content: space-between;
 }
 
-main{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
 .card{
-    width: 25rem;
+    width: 24rem;
     padding: 0.5rem;
+    height: 25rem;
 }
 .card-text{
     display: -webkit-box;
@@ -26,4 +22,67 @@ main{
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+
+.btn-task-guia{
+    width: 10rem;
+    border: 1px solid white;
+    border-bottom: none;
+    height: 3rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    background-color: white;
+    z-index: 1;
+    transition: 0.2s;
+}
+.btn-task-guia:hover{
+    transform: scale(1.04);
+    border: 1px solid rgba(81, 80, 80, 0.221);
+    z-index: 9;
+} 
+
+.main-card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: calc(100vh - 1.7rem);
+    background-color: aliceblue;
+    margin-top: -1.7rem;
+    padding: 1rem;
+    padding-left: 1.6rem;
+    z-index: 2;
+}
+
+.btn-guia-select{
+    background-color: aliceblue;
+    border: none;
+    z-index: 3;
+}
+
+.btn-tasks-new{
+    position: fixed;
+    right: 30px;
+    bottom: 30px; 
+    width: 60px; 
+    height: 60px; 
+    border: none; 
+    border-radius: 50%; 
+    background-color: #119000c1; 
+    color: white; 
+    font-size: 32px; 
+    font-weight: 300; 
+    line-height: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    z-index: 9999; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); 
+    transition: 0.2s;
+}
+
+.btn-tasks-new:hover{
+    transform: scale(1.1);
 }
