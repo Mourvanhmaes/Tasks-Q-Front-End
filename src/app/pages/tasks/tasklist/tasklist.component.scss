@@ -1,0 +1,29 @@
+.nav-tasks{
+    display: flex;
+    justify-content: space-between;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.card{
+    width: 25rem;
+    padding: 0.5rem;
+}
+.card-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    height: 4.7rem;
+}
+.card-descricao p{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
