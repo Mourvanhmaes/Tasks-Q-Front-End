@@ -86,3 +86,17 @@
 .btn-tasks-new:hover{
     transform: scale(1.1);
 }
+
+.btn-acao-card{
+    display: flex;
+    gap: 1rem;
+
+    button{
+        width: 8rem;
+        font-size: 90%;
+        transition: 0.2s;
+    }
+    button:hover{
+        transform: scale(1.04);
+    }
+}

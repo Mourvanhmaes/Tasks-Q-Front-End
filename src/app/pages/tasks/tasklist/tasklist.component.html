@@ -48,28 +48,52 @@
                     <p><b>Criado por: </b>{{task.creatorId}}</p>
                 </div>
                 <div class="cads-button text-center">
-                <button type="button" class="btn btn-primary">Detalhes</button>
+                <button type="button" class="btn btn-primary" (click)="description(task)">Detalhes</button>
                 </div>
             </div>
         </div>
     }
 </main>
 
-<button type="button" class="btn-tasks-new" mdbRipple (click)="novo()">+</button>
+<button type="button" class="btn-tasks-new" mdbRipple (click)="new()">+</button>
 
 <ng-template #modalTasks>
     <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Tasks</h5>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="modalRef.close()"
-  ></button>
-</div>
-<div class="modal-body">
-    <app-taskdetails
-        (retorno)="retornoDetalhe($event)"
-    ></app-taskdetails>
-</div>
+        <h5 class="modal-title" id="exampleModalLabel">Tasks</h5>
+        <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modalRef.close()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <app-taskdetails
+            [task]="taskSelect"
+            (retorno)="retornoDetalhe($event)"
+        ></app-taskdetails>
+    </div>
+</ng-template>
+
+<ng-template #modalDesc>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalhes da tarefa</h5>
+        <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="modalRef.close()"
+        ></button>
+    </div>
+    <div class="modal-body">
+        <app-taskdescription
+            [task]="taskSelect"
+        ></app-taskdescription>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-acao-card">
+            <button type="button" class="btn btn-primary bg-warning" (click)="editTask(taskSelect)">Editar</button>
+            <button type="button" class="btn btn-primary bg-danger">Deletar</button>
+        </div>
+    </div>
 </ng-template>

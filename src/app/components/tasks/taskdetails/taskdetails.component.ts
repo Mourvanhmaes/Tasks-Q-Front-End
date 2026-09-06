@@ -10,11 +10,11 @@ import { Priority } from '../../../models/enums/priority.enum';
   styleUrl: './taskdetails.component.scss'
 })
 export class TaskdetailsComponent {
+  @Input() task!: Tasks;
   @Output() retorno = new EventEmitter<Tasks>();
-  
   Priority = Priority;
 
-  task: Tasks = new Tasks()
+
 
 
   salvar() {

@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="text-center">{{task.title}}</h3>
+    <br>
+    <p><b>Tarefa número: </b>#{{task.id}}</p>
+    <p><b>Descrição: </b>{{task.description}}</p>
+    <p><b>Status: </b>{{task.status}}</p>
+    <p><b>Prioridade: </b>{{task.priority}}</p>
+    <p><b>Destino: </b>{{task.assigneeId}}</p>
+    <p><b>Criado por: </b>{{task.creatorId}}</p>
+    <div class="datas">
+      <div class="data-card">
+        <span>Criado em: </span>
+        <strong>{{task.createdAt}}</strong>
+      </div>
+      <div class="data-card">
+        <span>Prazo: </span>
+        <strong>{{task.deadLine}}</strong>
+      </div>
+      <div class="data-card">
+        <span>Atualizado em: </span>
+        <strong>{{task.updatedAt}}</strong>
+      </div>
+      <div class="data-card">
+        <span>Concluído em: </span>
+        <strong>{{task.completedAt}}</strong>
+      </div>
+    </div>
+  </div>
+</div>
