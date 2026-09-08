@@ -70,7 +70,7 @@
     <div class="modal-body">
         <app-taskdetails
             [task]="taskSelect"
-            (retorno)="retornoDetalhe($event)"
+            (retorno)="Detalisreturn($event)"
         ></app-taskdetails>
     </div>
 </ng-template>
@@ -92,8 +92,9 @@
     </div>
     <div class="modal-footer">
         <div class="btn-acao-card">
+            <button type="button" class="btn btn-primary bg-primary" (click)="closeModal()">Cancelar</button>
             <button type="button" class="btn btn-primary bg-warning" (click)="editTask(taskSelect)">Editar</button>
-            <button type="button" class="btn btn-primary bg-danger">Deletar</button>
+            <button type="button" class="btn btn-primary bg-danger" (click)="deleteTask(taskSelect)">Deletar</button>
         </div>
     </div>
 </ng-template>

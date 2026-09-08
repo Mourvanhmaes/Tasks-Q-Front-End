@@ -5,6 +5,8 @@ import { MdbModalModule, MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit
 import { TaskdetailsComponent } from '../../../components/tasks/taskdetails/taskdetails.component';
 import { Tasks } from '../../../models/tasks';
 import { TaskdescriptionComponent } from '../../../components/tasks/taskdescription/taskdescription.component';
+import Swal from 'sweetalert2';
+
 
 import { Status } from '../../../models/enums/status.enum';
 import { Priority } from '../../../models/enums/priority.enum';
@@ -111,17 +113,49 @@ export class TasklistComponent {
     this.modalRef = this.modalService.open(this.modalDesc);
   }
 
-  retornoDetalhe(task: Tasks) {
-      console.log(task);
-
-      this.tasks.push(task);
-
+  Detalisreturn(objtreturn: { task: Tasks; newtask: boolean }) {
+      if(objtreturn.newtask){
+        const findTask = this.tasks.findIndex(t => t.id === objtreturn.task.id);
+        this.tasks[findTask] = objtreturn.task;
+      }
+      else{
+        objtreturn.task.id = Math.max(
+          ...this.tasks.map(t => t.id)
+        ) + 1;
+        this.tasks.push(objtreturn.task);
+      }
       this.modalRef.close();
+
   }
 
   editTask(task: Tasks){
     this.modalRef.close();
     this.taskSelect = task;
     this.modalRef = this.modalService.open(this.modalTasks);
+  }
+
+  deleteTask(task: Tasks){
+    this.modalRef.close();
+    Swal.fire({
+      title: 'Deseja excluir a tarefa ' + this.taskSelect.title + ' ?',
+      text: 'Essa tarefa será deletada para sempre confirme sua escolha!!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if(result.isConfirmed){
+          Swal.fire({
+            title: 'Excluída!',
+            text: 'A tarefa foi excluída com sucesso.',
+            icon: 'success'
+          });
+          this.tasks = this.tasks.filter(t => t.id !== task.id);
+        }
+      });
+  }
+
+  closeModal(){
+    this.modalRef.close();
   }
 }

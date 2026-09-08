@@ -11,14 +11,34 @@ import { Priority } from '../../../models/enums/priority.enum';
 })
 export class TaskdetailsComponent {
   @Input() task!: Tasks;
-  @Output() retorno = new EventEmitter<Tasks>();
-  Priority = Priority;
+  @Output() retorno = new EventEmitter<
+  {
+    task: Tasks;
+    newtask: boolean;
+  }>();
 
+  Priority = Priority; 
+  copyTask!: Tasks;
+  newtask = false;
+
+  ngOnInit(){
+    if(Object.keys(this.task).length === 0){
+      this.newtask = true;
+      this.copyTask = new Tasks();
+    }
+    else{
+      this.copyTask = {...this.task}
+    }
+
+  }
 
 
 
   salvar() {
-    this.retorno.emit(this.task);
+    this.retorno.emit({
+      task: this.copyTask,
+      newtask: this.newtask
+    });
   }
 
 }

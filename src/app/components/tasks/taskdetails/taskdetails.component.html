@@ -7,31 +7,31 @@
                     <br>
 
                      <mdb-form-control>
-                        <input mdbInput type="text" id="title" class="form-control mb-3" [(ngModel)]='task.title'/>
+                        <input mdbInput type="text" id="title" class="form-control mb-3" [(ngModel)]='copyTask.title'/>
                         <label mdbLabel class="form-label" for="title">Titulo</label>
                     </mdb-form-control>
                     <mdb-form-control>
-                        <textarea mdbInput class="form-control" id="description" rows="4" [(ngModel)]='task.description'></textarea>
+                        <textarea mdbInput class="form-control" id="description" rows="4" [(ngModel)]='copyTask.description'></textarea>
                         <label mdbLabel class="form-label" for="description">Descrição</label>
                     </mdb-form-control>
                     <br>
                     <p>Prioridade:</p>
                     <div class="btn-group">
-                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeAlta" autocomplete="off" [value]="Priority.ALTA" [(ngModel)]="task.priority" />
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeAlta" autocomplete="off" [value]="Priority.ALTA" [(ngModel)]="copyTask.priority" />
                         <label class="btn btn-secondary" for="taskPrioridadeAlta">Alta</label>
-                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeMedia" autocomplete="off" [value]="Priority.MEDIA" [(ngModel)]="task.priority" />
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeMedia" autocomplete="off" [value]="Priority.MEDIA" [(ngModel)]="copyTask.priority" />
                         <label class="btn btn-secondary" for="taskPrioridadeMedia">Média</label>
-                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeBaixa" autocomplete="off" [value]="Priority.BAIXA" [(ngModel)]="task.priority" />
+                        <input mdbRadio type="radio" class="btn-check" name="options" id="taskPrioridadeBaixa" autocomplete="off" [value]="Priority.BAIXA" [(ngModel)]="copyTask.priority" />
                         <label class="btn btn-secondary" for="taskPrioridadeBaixa">Baixa</label>
                     </div>
                     <br /><br/>
                     <mdb-form-control>
-                        <input mdbInput type="date" id="deadLine" class="form-control" [(ngModel)]="task.deadLine" />
+                        <input mdbInput type="date" id="deadLine" class="form-control" [(ngModel)]="copyTask.deadLine" />
                         <label mdbLabel class="form-label" for="deadLine">Prazo</label>
                     </mdb-form-control>
                     <br />
                     <mdb-form-control>
-                        <select mdbInput id="assignee" class="form-control mb-3" [(ngModel)]="task.assigneeId">
+                        <select mdbInput id="assignee" class="form-control mb-3" [(ngModel)]="copyTask.assigneeId">
                             <option [ngValue]="null">Selecione uma colaborador</option>
                             <!-- @for (user of users; track user.id) {
                                 <option [ngValue]="marca">{{ user.name }}</option>
