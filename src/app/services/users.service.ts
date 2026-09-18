@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CargoApiResponse, UserApiResponse, UserCreateRequest, Users } from '../models/users';
+import {CargoApiResponse, UserApiResponse, UserCreateRequest, UserUpdateRequest, Users} from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,25 @@ cadastrar(dados: UserCreateRequest): Observable<UserApiResponse> {
   return this.http.post<UserApiResponse>(this.apiUrl, dados);
 }
 
+atualizar(
+  id: number,
+  dados: UserUpdateRequest
+): Observable<UserApiResponse> {
+  return this.http.put<UserApiResponse>(
+    `${this.apiUrl}/${id}`,
+    dados
+  );
+}
+
 inativar(id: number): Observable<void> {
   return this.http.delete<void>(`${this.apiUrl}/${id}`);
+}
+
+ativar(id: number): Observable<UserApiResponse> {
+  return this.http.patch<UserApiResponse>(
+    `${this.apiUrl}/${id}/ativar`,
+    {}
+  );
 }
 
   readonly users: Users[] = [

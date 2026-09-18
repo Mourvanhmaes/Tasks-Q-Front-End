@@ -3,7 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import { CargoApiResponse } from '../../../models/users';
+import {
+  CargoApiResponse,
+  UserTableRow
+} from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
 
 @Component({
@@ -13,6 +16,8 @@ import { UsersService } from '../../../services/users.service';
   styleUrl: './user-form-modal.component.scss'
 })
 export class UserFormModalComponent implements OnInit {
+  usuario?: UserTableRow;
+
   nome = '';
   email = '';
   senha = '';
@@ -28,48 +33,76 @@ export class UserFormModalComponent implements OnInit {
     private readonly usersService: UsersService
   ) {}
 
+  get modoEdicao(): boolean {
+    return this.usuario !== undefined;
+  }
+
   ngOnInit(): void {
+    if (this.usuario) {
+      this.nome = this.usuario.name;
+      this.email = this.usuario.email;
+      this.cargoId = this.usuario.cargoId;
+      this.status = this.usuario.status;
+    }
+
     this.usersService.listarCargos().subscribe({
       next: cargos => {
         this.cargos = cargos;
 
-        if (cargos.length > 0) {
+        if (this.cargoId === null && cargos.length > 0) {
           this.cargoId = cargos[0].id;
         }
       },
       error: () => {
-        this.erro = 'nao foi possivel carregar os cargos';
+        this.erro = 'Não foi possível carregar os cargos.';
       }
     });
   }
 
-  salvar(): void {
-    if (
-      !this.nome.trim() ||
-      !this.email.trim() ||
-      this.senha.length < 8 ||
-      this.cargoId === null
-    ) {
-      this.erro = 'Prencha os campos e use uma senha com pelo menos 8 caracteres.';
-      return;
+salvar(): void {
+  const cargoId = this.cargoId;
+
+  const dadosInvalidos =
+    !this.nome.trim() ||
+    !this.email.trim() ||
+    cargoId === null;
+
+  const senhaInvalida =
+    !this.modoEdicao && this.senha.length < 8;
+
+  if (dadosInvalidos || senhaInvalida) {
+    this.erro = this.modoEdicao
+      ? 'Preencha todos os campos.'
+      : 'Preencha os campos e use uma senha com pelo menos 8 caracteres.';
+    return;
+  }
+
+  this.salvando = true;
+  this.erro = '';
+
+  const dados = {
+    nome: this.nome.trim(),
+    email: this.email.trim(),
+    cargoId,
+    status: this.status,
+    urlAvatar: null
+  };
+
+  const requisicao = this.usuario
+    ? this.usersService.atualizar(this.usuario.id, dados)
+    : this.usersService.cadastrar({
+        ...dados,
+        senha: this.senha
+      });
+
+  requisicao.subscribe({
+    next: usuario => this.modalRef.close(usuario),
+    error: () => {
+      this.salvando = false;
+      this.erro = this.modoEdicao
+        ? 'Não foi possível atualizar o usuário.'
+        : 'Não foi possível cadastrar o usuário.';
     }
-
-    this.salvando = true;
-    this.erro = '';
-
-    this.usersService.cadastrar({
-      nome: this.nome.trim(),
-      email: this.email.trim(),
-      senha: this.senha,
-      cargoId: this.cargoId,
-      status: this.status,
-      urlAvatar: null
-    }).subscribe({
-      next: usuario => this.modalRef.close(usuario),
-      error: () => {
-        this.salvando = false;
-        this.erro = 'nao foi possivel cadastrar o usuario';
-      }
-    });
-  }
+  });
+}
 }

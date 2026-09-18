@@ -55,3 +55,10 @@ export interface UserCreateRequest {
   urlAvatar: string | null;
 }
 
+export interface UserUpdateRequest {
+  nome: string;
+  email: string;
+  cargoId: number;
+  status: 'ATIVO' | 'INATIVO';
+  urlAvatar: string | null;
+}

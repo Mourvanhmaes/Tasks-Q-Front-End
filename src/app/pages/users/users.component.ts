@@ -94,26 +94,31 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  openUserModal(): void {
-    const modalRef = this.modalService.open(UserFormModalComponent, {
-      modalClass: 'modal-dialog-centered'
-    });
+openUserModal(usuario?: UserTableRow): void {
+  const modalRef = this.modalService.open(UserFormModalComponent, {
+    modalClass: 'modal-dialog-centered',
+    data: usuario ? { usuario } : {}
+  });
 
-    modalRef.onClose.subscribe(usuarioCriado => {
-      if (usuarioCriado) {
-        this.carregarUsuarios();
-      }
-    });
-  }
+  modalRef.onClose.subscribe(resultado => {
+    if (resultado) {
+      this.carregarUsuarios();
+    }
+  });
+}
 
-openDeleteUserModal(usuario: UserTableRow): void {
+openStatusModal(usuario: UserTableRow): void {
+  const ativando = usuario.status === 'INATIVO';
+
   const modalRef = this.modalService.open(ConfirmModalComponent, {
     modalClass: 'modal-dialog-centered modal-sm',
     data: {
-      title: 'Inativar usuário?',
-      message: 'O usuário perderá o acesso ao sistema:',
+      title: ativando ? 'Ativar usuário?' : 'Inativar usuário?',
+      message: ativando
+        ? 'O usuário recuperará o acesso ao sistema:'
+        : 'O usuário perderá o acesso ao sistema:',
       name: usuario.name,
-      confirmText: 'Inativar usuário'
+      confirmText: ativando ? 'Ativar usuário' : 'Inativar usuário'
     }
   });
 
@@ -122,10 +127,17 @@ openDeleteUserModal(usuario: UserTableRow): void {
       return;
     }
 
-    this.usersService.inativar(usuario.id).subscribe({
+    const resultado = {
       next: () => this.carregarUsuarios(),
-      error: erro => console.error('Erro ao inativar usuário', erro)
-    });
+      error: (erro: unknown) =>
+        console.error('Erro ao alterar status do usuário', erro)
+    };
+
+    if (ativando) {
+      this.usersService.ativar(usuario.id).subscribe(resultado);
+    } else {
+      this.usersService.inativar(usuario.id).subscribe(resultado);
+    }
   });
 }
 }

@@ -53,16 +53,23 @@
       Editar
     </button>
 
-    <button
-      type="button"
-      mdbRipple
-      class="row-action row-action--danger"
-      (click)="remove.emit()"
-      [disabled]="user.status === 'INATIVO'"
-      title="Inativar">
+<button
+  type="button"
+  mdbRipple
+  class="row-action"
+  [class.row-action--danger]="user.status === 'ATIVO'"
+  [class.row-action--success]="user.status === 'INATIVO'"
+  (click)="toggleStatus.emit()"
+  [attr.title]="user.status === 'ATIVO' ? 'Inativar' : 'Ativar'">
 
-      <i class="fa-solid fa-user-slash" aria-hidden="true"></i>
-      {{ user.status === 'INATIVO' ? 'Inativo' : 'Inativar' }}
-    </button>
+  <i
+    class="fa-solid"
+    [class.fa-user-slash]="user.status === 'ATIVO'"
+    [class.fa-user-check]="user.status === 'INATIVO'"
+    aria-hidden="true">
+  </i>
+
+  {{ user.status === 'ATIVO' ? 'Inativar' : 'Ativar' }}
+</button>
   </div>
 </td>

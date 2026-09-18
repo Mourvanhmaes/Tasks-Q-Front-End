@@ -124,8 +124,8 @@
               <tr
                 app-user-table-row
                 [user]="user"
-                (edit)="openUserModal()"
-                (remove)="openDeleteUserModal(user)">
+                (edit)="openUserModal(user)"
+                (toggleStatus)="openStatusModal(user)">
               </tr>
             }
           </tbody>

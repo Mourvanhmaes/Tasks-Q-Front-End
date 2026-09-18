@@ -186,3 +186,27 @@ $row-h: 60px;
   border-color: rgba(255, 99, 118, 0.45);
   color: $red;
 }
+
+.row-action--danger {
+  border-color: rgba(255, 99, 118, 0.35);
+  background: rgba(255, 99, 118, 0.08);
+  color: $red;
+
+  &:hover {
+    background: rgba(255, 99, 118, 0.16);
+    border-color: rgba(255, 99, 118, 0.65);
+    color: #ff8a98;
+  }
+}
+
+.row-action--success {
+  border-color: rgba(49, 216, 117, 0.35);
+  background: rgba(49, 216, 117, 0.08);
+  color: $green;
+
+  &:hover {
+    background: rgba(49, 216, 117, 0.16);
+    border-color: rgba(49, 216, 117, 0.65);
+    color: #61e897;
+  }
+}
