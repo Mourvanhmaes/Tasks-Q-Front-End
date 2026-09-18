@@ -1,72 +1,120 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AppShellComponent } from '../../components/layout/app-shell.component';
 import { ProfileBannerComponent } from '../../components/profile/profile-banner/profile-banner.component';
-import { XpProgressBarComponent } from '../../components/profile/xp-progress-bar.component';
 import { InfoListComponent } from '../../components/profile/info-list.component';
-import { ActivityListComponent } from '../../components/profile/activity-list.component';
-import { TierBadgeComponent } from '../../components/shared/tier-badge.component';
 import { EditProfileModalComponent } from '../../components/modals/edit-profile-modal/edit-profile-modal.component';
-import { ActivityItem, InfoListItem } from '../../models/profile';
+import { InfoListItem } from '../../models/profile';
+import { UserApiResponse } from '../../models/users';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-profile',
   imports: [
     AppShellComponent,
     ProfileBannerComponent,
-    XpProgressBarComponent,
-    InfoListComponent,
-    ActivityListComponent,
-    TierBadgeComponent
+    InfoListComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+  usuario: UserApiResponse | null = null;
+  personalInfo: InfoListItem[] = [];
+  erro = '';
 
-  // MOCK: dados fixos apenas para o visual.
-  // TODO(api): substituir por GET /api/users/:id via HttpClient.
-  // Obs.: a tela ainda nao le o parametro :id da rota — ver relatorio.
-  readonly personalInfo: InfoListItem[] = [
-    { label: 'Nome completo', value: 'Mariana Ferreira' },
-    { label: 'E-mail', value: 'mariana.ferreira@cabanos.com' },
-    { label: 'Telefone', value: '(11) 98765-4321' },
-    { label: 'Cargo', value: 'Gerente de Projetos' },
-    { label: 'Departamento', value: 'Produto' },
-    { label: 'Na empresa desde', value: '03 de marco de 2022' }
-  ];
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly usersService: UsersService,
+    private readonly modalService: MdbModalService
+  ) {}
 
-  // MOCK: dados fixos apenas para o visual.
-  // TODO(api): substituir por GET /api/users/:id/atividades via HttpClient.
-  readonly recentActivity: ActivityItem[] = [
-    {
-      icon: 'fa-solid fa-circle-check',
-      text: 'Concluiu',
-      highlight: 'Revisar textos da landing page',
-      time: 'Ha 2 horas',
-      xp: '+15 XP'
-    },
-    {
-      icon: 'fa-solid fa-circle-check',
-      text: 'Concluiu',
-      highlight: 'Planejar sprint de outubro',
-      time: 'Ontem',
-      xp: '+25 XP'
-    },
-    {
-      icon: 'fa-solid fa-trophy',
-      text: 'Alcancou o',
-      highlight: 'Tier Ouro',
-      time: 'Ha 3 dias',
-      xp: '+100 XP'
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (!id) {
+      this.erro = 'Usuário inválido.';
+      return;
     }
-  ];
 
-  constructor(private modalService: MdbModalService) {}
+    this.carregarUsuario(id);
+  }
 
-  openEditProfileModal(): void {
-    this.modalService.open(EditProfileModalComponent, {
-      modalClass: 'modal-dialog-centered'
+  private carregarUsuario(id: number): void {
+    this.usersService.buscarPorId(id).subscribe({
+      next: usuario => {
+        this.usuario = usuario;
+
+        this.personalInfo = [
+          { label: 'Nome completo', value: usuario.nome },
+          { label: 'E-mail', value: usuario.email },
+          { label: 'Cargo', value: usuario.cargo.nome },
+          {
+            label: 'Status',
+            value: usuario.status === 'ATIVO' ? 'Ativo' : 'Inativo'
+          },
+          {
+            label: 'Na empresa desde',
+            value: new Date(usuario.createdAt).toLocaleDateString('pt-BR')
+          }
+        ];
+      },
+      error: () => {
+        this.erro = 'Não foi possível carregar o perfil.';
+      }
     });
   }
+
+  get iniciais(): string {
+  if (!this.usuario) {
+    return '';
+  }
+
+  return this.usuario.nome
+    .split(' ')
+    .slice(0, 2)
+    .map(parte => parte.charAt(0))
+    .join('')
+    .toUpperCase();
+}
+
+get eloLabel(): string {
+  switch (this.usuario?.elo) {
+    case 'JUNIOR': return 'Júnior';
+    case 'PLENO': return 'Pleno';
+    case 'ESPECIALISTA': return 'Especialista';
+    case 'LEGACY': return 'Legacy';
+    default: return 'Iniciante';
+  }
+}
+
+get tierModifier(): 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond' {
+  switch (this.usuario?.elo) {
+    case 'JUNIOR': return 'silver';
+    case 'PLENO': return 'gold';
+    case 'ESPECIALISTA': return 'platinum';
+    case 'LEGACY': return 'diamond';
+    default: return 'bronze';
+  }
+}
+
+openEditProfileModal(): void {
+  if (!this.usuario) {
+    return;
+  }
+
+  const modalRef = this.modalService.open(EditProfileModalComponent, {
+    modalClass: 'modal-dialog-centered',
+    data: {
+      usuario: this.usuario
+    }
+  });
+
+  modalRef.onClose.subscribe(resultado => {
+    if (resultado) {
+      this.carregarUsuario(resultado.id);
+    }
+  });
+}
 }

@@ -15,6 +15,13 @@ constructor(private readonly http: HttpClient) {}
 listar(): Observable<UserApiResponse[]> {
   return this.http.get<UserApiResponse[]>(this.apiUrl);
 }
+
+buscarPorId(id: number): Observable<UserApiResponse> {
+  return this.http.get<UserApiResponse>(
+    `${this.apiUrl}/${id}`
+  );
+}
+
 listarCargos(): Observable<CargoApiResponse[]> {
   return this.http.get<CargoApiResponse[]>(this.cargosUrl);
 }
@@ -30,6 +37,13 @@ atualizar(
   return this.http.put<UserApiResponse>(
     `${this.apiUrl}/${id}`,
     dados
+  );
+}
+
+alterarSenha(id: number, senha: string): Observable<void> {
+  return this.http.patch<void>(
+    `${this.apiUrl}/${id}/senha`,
+    { senha }
   );
 }
 
