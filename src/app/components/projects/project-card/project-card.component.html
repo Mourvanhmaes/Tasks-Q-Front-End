@@ -1,0 +1,44 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+<div class="project-card__header">
+  <div>
+    <h3 class="project-card__title">
+      <a [routerLink]="['/tasks']" [queryParams]="{ projeto: project.name }">{{ project.name }}</a>
+    </h3>
+    <span class="badge badge--{{ project.statusModifier }}">{{ project.statusLabel }}</span>
+  </div>
+  <div class="project-card__menu">
+    <button type="button" mdbRipple class="btn-icon" (click)="edit.emit()" title="Editar"><i class="fa-solid fa-pen"></i></button>
+  </div>
+</div>
+<p class="project-card__description">{{ project.description }}</p>
+
+<div class="project-card__progress">
+  <div class="project-card__progress-header">
+    <span>Progresso</span><span>{{ project.percentLabel }}</span>
+  </div>
+  <div class="progress-bar-track">
+    <div
+      class="progress-bar-fill"
+      [class.progress-bar-fill--danger]="project.progressModifier === 'danger'"
+      [class.progress-bar-fill--success]="project.progressModifier === 'success'"
+      [class.progress-bar-fill--neutral]="project.progressModifier === 'neutral'"
+      [style.width]="project.progress"></div>
+  </div>
+</div>
+
+<div class="project-card__footer">
+  <app-avatar-group [initials]="project.avatars"></app-avatar-group>
+  <span class="project-card__tasks"><i class="fa-solid fa-list-check me-1"></i>{{ project.tasksLabel }}</span>
+  <span class="project-card__deadline" [class.project-card__deadline--overdue]="project.deadlineOverdue">
+    <i class="fa-solid fa-calendar-days me-1"></i>{{ project.deadlineLabel }}
+  </span>
+</div>
+
+<div class="project-card__actions">
+  <a [routerLink]="['/tasks']" [queryParams]="{ projeto: project.name }" mdbRipple class="btn btn-secondary-ghost btn-sm">
+    <i class="fa-solid fa-eye me-2"></i>Ver detalhes
+  </a>
+  <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm" (click)="team.emit()">
+    <i class="fa-solid fa-user-plus me-2"></i>Equipe
+  </button>
+</div>

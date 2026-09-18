@@ -1,0 +1,43 @@
+@use 'dashboard-tokens' as *;
+
+// ------------------------------------------------------------
+// Cabecalho interno dos cards menores do dashboard —
+// usado por stat-card e holidays-card
+// ------------------------------------------------------------
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.card-head__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-primary;
+  min-width: 0;
+}
+.card-head__title--lead { flex: 1; font-size: 1.02rem; }
+.card-head__title-icon { font-size: 0.95rem; }
+.card-head__title-icon--purple { color: $purple-light; }
+
+.card-head__menu {
+  margin-left: auto;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: $text-tertiary;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: background 180ms ease, color 180ms ease;
+}
+.card-head__menu:hover { background: rgba(255, 255, 255, 0.05); color: $text-secondary; }

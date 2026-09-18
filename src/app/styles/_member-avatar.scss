@@ -1,0 +1,21 @@
+@use 'dashboard-tokens' as *;
+
+// ------------------------------------------------------------
+// Avatares de membros do dashboard — usados por avatar-group
+// (variante member) e por ranking-list (variante dashboard)
+// ------------------------------------------------------------
+.member-avatar {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #353d54;
+  border: 2px solid $card-bg-inner;
+}
+.member-avatar--more { background: #2c3347; color: $text-secondary; }

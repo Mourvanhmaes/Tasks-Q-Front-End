@@ -1,1 +1,74 @@
-<p>tasks works!</p>
+<app-shell>
+<div class="page">
+
+  <app-page-header
+    class="page-header"
+    [title]="'Gerenciamento de Tarefas'"
+    [subtitle]="'Acompanhe, edite e distribua as tarefas de todos os projetos.'">
+    <button type="button" mdbRipple class="btn btn-primary" (click)="openTaskModal()">
+      <i class="fa-solid fa-plus me-2"></i>Nova Tarefa
+    </button>
+  </app-page-header>
+
+  <div class="page-toolbar">
+    <mdb-form-control class="page-toolbar__search">
+      <input mdbInput type="text" id="buscaTarefa" class="form-control" />
+      <label mdbLabel class="form-label" for="buscaTarefa">Buscar tarefa por titulo</label>
+    </mdb-form-control>
+
+    <!-- MOCK INICIO: filtros de projeto e prioridade — remover quando existir busca/filtro no service -->
+    <select class="form-select page-toolbar__select" aria-label="Filtrar por projeto">
+      <option selected>Minhas Tarefas</option>
+      <option>Todos os projetos</option>
+      <option>Portal do Cliente</option>
+      <option>App Mobile Cabanos</option>
+      <option>Site Institucional</option>
+      <option>Campanha de Doacao Natalina</option>
+    </select>
+    <select class="form-select page-toolbar__select" aria-label="Filtrar por prioridade">
+      <option selected>Todas as prioridades</option>
+      <option>Urgente</option>
+      <option>Alta</option>
+      <option>Media</option>
+      <option>Baixa</option>
+    </select>
+    <!-- MOCK FIM -->
+
+    <!-- MOCK INICIO: troca do usuario da sessao — remover quando existir login/autenticacao -->
+    <div class="page-toolbar__session">
+      <label class="page-toolbar__session-label" for="usuarioSessao">Visualizando como</label>
+      <select id="usuarioSessao" class="form-select page-toolbar__select" (change)="changeCurrentUser($event)">
+        @for (user of users; track user.id) {
+          <option [value]="user.id" [selected]="user.id === currentUser().id">{{ user.name }} - {{ user.roleLabel }}</option>
+        }
+      </select>
+    </div>
+    <!-- MOCK FIM -->
+  </div>
+
+  <!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+  <div class="board">
+
+    @for (column of columns(); track column.status) {
+      <app-board-column class="board-column {{ column.modifier }}" [column]="column">
+        @for (task of column.tasks; track task.id) {
+          <app-task-card
+            class="card"
+            [class.card--concluded]="task.concluded"
+            [task]="task"
+            [projectName]="projectName(task)"
+            [assigneeInitials]="initials(task)"
+            [concludedByName]="concludedBy(task)"
+            [moveOptions]="moveOptions(task)"
+            [canConclude]="canConclude(task)"
+            (open)="openTaskDetailModal(task)"
+            (move)="move(task, $event)"
+            (conclude)="conclude(task)"
+            (reopen)="reopen(task)"></app-task-card>
+        }
+      </app-board-column>
+    }
+
+  </div>
+</div>
+</app-shell>

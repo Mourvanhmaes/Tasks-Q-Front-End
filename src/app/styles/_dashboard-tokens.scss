@@ -1,0 +1,30 @@
+// ============================================================
+// Paleta local do dashboard — copiada de dashboard.component.scss
+// para poder ser usada pelos componentes extraidos da tela.
+// Nao altera os tokens globais do projeto.
+// ============================================================
+$dashboard-bg-a: #171b2a;
+$dashboard-bg-b: #181d2c;
+$dashboard-bg-c: #151a28;
+
+$card-bg: #22283a;
+$card-bg-inner: #202638;
+$card-border: rgba(255, 255, 255, 0.045);
+$card-border-inner: rgba(255, 255, 255, 0.035);
+
+$text-primary: #f5f7fc;
+$text-secondary: #a9b2c8;
+$text-tertiary: #77829b;
+
+$purple: #8247f5;
+$purple-light: #a970ff;
+$blue: #4d8fff;
+$blue-strong: #3b82f6;
+$green: #34d67a;
+$danger: #ff6376;
+$yellow: #ffc94a;
+
+$track: #31384a;
+
+$radius-card: 16px;
+$radius-inner: 13px;

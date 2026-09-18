@@ -1,0 +1,202 @@
+// ============================================================
+// Sidebar TasksQ — dark mode
+// ============================================================
+$sidebar-bg: #202535;
+$sidebar-border: rgba(255, 255, 255, 0.04);
+
+$text-primary: #f5f7fc;
+$text-secondary: #a9b2c8;
+$text-tertiary: #77829b;
+
+$purple: #8247f5;
+$purple-light: #a970ff;
+
+// O host e o item flex de .app-shell; precisa esticar na altura toda para
+// que a .sidebar tenha espaco para "grudar" enquanto a pagina rola
+:host {
+  flex: none;
+  align-self: stretch;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  width: 248px;
+  flex: none;
+  height: 100vh;
+  overflow-y: auto;
+  background: $sidebar-bg;
+  border-right: 1px solid $sidebar-border;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px 16px;
+}
+
+// ------------------------------------------------------------
+// Marca
+// ------------------------------------------------------------
+.sidebar__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  padding: 8px 8px 0;
+  margin-bottom: 32px;
+}
+
+.sidebar__brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #a970ff, #6d33d6);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex: none;
+  box-shadow: 0 6px 18px rgba(130, 71, 245, 0.28);
+}
+
+.sidebar__brand-text {
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: $text-primary;
+
+  span { color: $purple-light; }
+}
+
+// ------------------------------------------------------------
+// Navegacao
+// ------------------------------------------------------------
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: $text-secondary;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 180ms ease, color 180ms ease;
+
+  i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+.sidebar__link:hover {
+  background: rgba(124, 58, 237, 0.10);
+  color: $text-primary;
+}
+
+.sidebar__link--active,
+.sidebar__link--active:hover {
+  background: linear-gradient(90deg, #6530b8, #50239b);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+// ------------------------------------------------------------
+// Rodape — perfil e sair
+// ------------------------------------------------------------
+.sidebar__footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-top: 14px;
+  margin-top: 16px;
+  border-top: 1px solid $sidebar-border;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+  padding: 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+.sidebar__user:hover { background: rgba(255, 255, 255, 0.04); }
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  background: #353d54;
+  border: none;
+  color: #ffffff;
+  flex: none;
+}
+
+.sidebar__user-info { display: flex; flex-direction: column; min-width: 0; }
+.sidebar__user-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: $text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar__user-role {
+  font-size: 0.74rem;
+  color: $text-tertiary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__logout {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: $text-tertiary;
+  text-decoration: none;
+  font-size: 0.86rem;
+  transition: background 180ms ease, color 180ms ease;
+}
+.sidebar__logout:hover { background: rgba(255, 99, 118, 0.12); color: #ff6376; }
+
+// ------------------------------------------------------------
+// Responsividade — mantem o comportamento horizontal ja existente
+// ------------------------------------------------------------
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    overflow-y: visible;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    padding: 10px 12px;
+    border-right: none;
+    border-bottom: 1px solid $sidebar-border;
+  }
+  .sidebar__brand, .sidebar__footer { display: none; }
+  .sidebar__nav { flex-direction: row; }
+  .sidebar__link { white-space: nowrap; }
+}

@@ -1,0 +1,21 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+<div class="profile-banner__cover"></div>
+<div class="profile-banner__content">
+  <div class="profile-avatar">
+    <span class="avatar avatar--xl">{{ initials }}</span>
+    <button type="button" class="profile-avatar__edit" title="Alterar avatar" (click)="changeAvatar.emit()">
+      <i class="fa-solid fa-camera"></i>
+    </button>
+  </div>
+  <div class="profile-banner__info">
+    <h1 class="profile-banner__name">{{ name }}</h1>
+    <p class="profile-banner__role">{{ role }}</p>
+    <app-tier-badge
+      class="tier-badge tier-badge--{{ tierModifier }}"
+      [icon]="'fa-solid fa-award'"
+      [label]="tierLabel"></app-tier-badge>
+  </div>
+  <button type="button" mdbRipple class="btn btn-outline-light profile-banner__edit-btn" (click)="edit.emit()">
+    <i class="fa-solid fa-pen me-2"></i>Editar dados
+  </button>
+</div>

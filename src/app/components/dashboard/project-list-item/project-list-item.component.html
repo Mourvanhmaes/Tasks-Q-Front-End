@@ -1,0 +1,33 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+<span class="project-item__icon project-item__icon--{{ project.iconModifier }}">
+  <i class="{{ project.icon }}" aria-hidden="true"></i>
+</span>
+
+<div class="project-item__body">
+  <div class="project-item__title-row">
+    <h3 class="project-item__title">{{ project.title }}</h3>
+    <span class="status-badge status-badge--{{ project.statusModifier }}">{{ project.statusLabel }}</span>
+  </div>
+  <p class="project-item__desc">{{ project.description }}</p>
+  <ul class="project-item__meta">
+    <li><i class="fa-regular fa-square-check" aria-hidden="true"></i> {{ project.tasksLabel }}</li>
+    <li><i class="fa-solid fa-user-group" aria-hidden="true"></i> {{ project.membersLabel }}</li>
+    <li
+      [class.project-item__meta-alert]="project.deadlineModifier === 'alert'"
+      [class.project-item__meta-done]="project.deadlineModifier === 'done'">
+      <i class="fa-regular fa-calendar" aria-hidden="true"></i> {{ project.deadlineLabel }}
+    </li>
+  </ul>
+</div>
+
+<div class="project-item__side">
+  <div class="project-item__progress">
+    <div class="progress-track">
+      <span class="progress-track__fill progress-track__fill--{{ project.progressModifier }}" [style]="'--progress: ' + project.progress"></span>
+    </div>
+    <span class="project-item__percent">{{ project.percentLabel }}</span>
+  </div>
+  <app-avatar-group [variant]="'member'" [initials]="project.avatars" [more]="project.moreAvatars"></app-avatar-group>
+</div>
+
+<i class="fa-solid fa-chevron-right project-item__chevron" aria-hidden="true"></i>

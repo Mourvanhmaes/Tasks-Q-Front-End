@@ -1,0 +1,134 @@
+@use '../../../styles/dashboard-tokens' as *;
+@use '../../../styles/member-avatar';
+
+// A regra do elemento raiz (.ranking-list) continua em cada pagina, porque
+// bate no host e as duas telas usam valores diferentes.
+
+// ============================================================
+// Variante dashboard — valores de dashboard.component.scss
+// ============================================================
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+  &:first-child { padding-top: 0; }
+  &:last-child { padding-bottom: 0; border-bottom: none; }
+}
+
+.ranking-item__position {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #2c3347;
+  color: $text-tertiary;
+}
+.ranking-item__position--gold {
+  background: linear-gradient(135deg, #ffd873, #e0a52c);
+  color: #3a2a06;
+}
+.ranking-item__position--silver {
+  background: linear-gradient(135deg, #e3e8f2, #a9b2c8);
+  color: #2b3142;
+}
+.ranking-item__position--bronze {
+  background: linear-gradient(135deg, #e8a76b, #b9713a);
+  color: #33200f;
+}
+
+.ranking-item .member-avatar {
+  width: 32px;
+  height: 32px;
+  border-color: $card-bg;
+}
+
+.ranking-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.ranking-item__name {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: $text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ranking-item__role {
+  font-size: 0.74rem;
+  color: $text-tertiary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ranking-item__score {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.25;
+}
+.ranking-item__score-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $text-primary;
+}
+.ranking-item__score-label {
+  font-size: 0.72rem;
+  color: $text-tertiary;
+}
+
+// ============================================================
+// Variante xp — valores de xp.component.scss
+// (.avatar e global e continua com override na propria tela de XP)
+// ============================================================
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+.ranking-row:hover { background: var(--color-surface-2); }
+.ranking-row--top { background: rgba(183, 148, 44, .10); }
+.ranking-row--me {
+  border: 1px solid rgba(164, 93, 255, .65);
+  background: linear-gradient(90deg, rgba(103, 38, 210, .75), rgba(74, 28, 170, .75));
+}
+
+.ranking-row__position { width: 28px; text-align: center; font-weight: 700; color: var(--color-text-muted); flex: none; }
+.ranking-row--top .ranking-row__position { color: var(--tier-gold); font-size: 1.1rem; }
+
+.ranking-row__name { flex: 1 1 30%; min-width: 0; font-size: 0.9rem; font-weight: 600; color: var(--color-text-primary); }
+.ranking-row__you { font-size: 0.65rem; font-weight: 700; color: var(--color-primary-300); text-transform: uppercase; margin-left: var(--space-2); }
+.ranking-row__role { flex: 1 1 25%; min-width: 0; font-size: 0.82rem; color: var(--color-text-muted); }
+.ranking-row__xp { width: 100px; flex: none; font-weight: 700; color: var(--color-text-primary); font-size: 0.9rem; text-align: right; }
+
+.tier-badge {
+  width: 100px;
+  flex: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 5px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 600;
+}
+.tier-badge--bronze { background: var(--tier-bronze); color: var(--color-dark); }
+.tier-badge--silver { background: var(--tier-silver); color: var(--color-dark); }
+.tier-badge--gold { background: var(--tier-gold); color: var(--color-dark); }
+.tier-badge--platinum { background: var(--tier-platinum); color: var(--color-dark); }
+.tier-badge--diamond { background: var(--tier-diamond); color: var(--color-dark); }
+
+@media (max-width: 900px) {
+  .ranking-row__role { display: none; }
+}

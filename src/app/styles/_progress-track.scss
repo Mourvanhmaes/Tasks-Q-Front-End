@@ -1,0 +1,25 @@
+@use 'dashboard-tokens' as *;
+
+// ------------------------------------------------------------
+// Barras de progresso do dashboard — usadas por stat-card,
+// project-list-item e tasks-summary
+// ------------------------------------------------------------
+.progress-track {
+  flex: 1;
+  min-width: 0;
+  height: 8px;
+  border-radius: 999px;
+  background: $track;
+  overflow: hidden;
+}
+
+.progress-track__fill {
+  display: block;
+  height: 100%;
+  width: var(--progress, 0%);
+  border-radius: 999px;
+}
+.progress-track__fill--purple { background: $purple-light; }
+.progress-track__fill--blue { background: $blue; }
+.progress-track__fill--success { background: $green; }
+.progress-track__fill--danger { background: $danger; }
