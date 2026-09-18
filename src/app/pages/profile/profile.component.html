@@ -1,69 +1,72 @@
 <app-shell>
-<div class="page">
+  <div class="page">
 
-  <!-- MOCK INICIO: perfil fixo — remover quando a tela ler o :id da rota e buscar na API -->
-  <app-profile-banner
-    class="profile-banner"
-    [initials]="'MF'"
-    [name]="'Mariana Ferreira'"
-    [role]="'Gerente de Projetos · Time de Produto'"
-    [tierLabel]="'Tier Ouro'"
-    [tierModifier]="'gold'"
-    (edit)="openEditProfileModal()"></app-profile-banner>
+    @if (erro) {
+      <div class="alert alert-danger">
+        {{ erro }}
+      </div>
+    }
 
-  <div class="stat-grid">
-    <div class="stat-card">
-      <div class="stat-card__icon stat-card__icon--xp"><i class="fa-solid fa-bolt"></i></div>
-      <div>
-        <span class="stat-card__value">8.420 XP</span>
-        <span class="stat-card__label">XP total</span>
+    @if (usuario) {
+      <app-profile-banner
+        class="profile-banner"
+        [initials]="iniciais"
+        [name]="usuario.nome"
+        [role]="usuario.cargo.nome"
+        [tierLabel]="eloLabel"
+        [tierModifier]="tierModifier"
+        (edit)="openEditProfileModal()">
+      </app-profile-banner>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--xp">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">{{ usuario.xp }} XP</span>
+            <span class="stat-card__label">XP total</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--success">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">
+              {{ usuario.status === 'ATIVO' ? 'Ativo' : 'Inativo' }}
+            </span>
+            <span class="stat-card__label">Status</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--streak">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">{{ eloLabel }}</span>
+            <span class="stat-card__label">Elo atual</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card__icon stat-card__icon--success"><i class="fa-solid fa-circle-check"></i></div>
-      <div>
-        <span class="stat-card__value">146</span>
-        <span class="stat-card__label">Tarefas concluidas</span>
+
+      <div class="profile-columns profile-columns--single">
+        <div class="panel">
+          <h2 class="panel__title">Dados pessoais</h2>
+
+          <dl
+            class="info-list"
+            app-info-list
+            [items]="personalInfo">
+          </dl>
+        </div>
       </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card__icon stat-card__icon--streak"><i class="fa-solid fa-fire"></i></div>
-      <div>
-        <span class="stat-card__value">6 dias</span>
-        <span class="stat-card__label">Sequencia atual</span>
-      </div>
-    </div>
+    }
+
   </div>
-
-  <app-xp-progress-bar
-    class="xp-progress-card"
-    [label]="'Progresso para o Tier Platina'"
-    [value]="'2.140 / 3.000 XP'"
-    [percent]="'71%'"></app-xp-progress-bar>
-  <!-- MOCK FIM -->
-
-  <!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
-  <div class="profile-columns">
-    <div class="panel">
-      <h2 class="panel__title">Dados pessoais</h2>
-      <dl class="info-list" app-info-list [items]="personalInfo"></dl>
-    </div>
-
-    <div class="panel">
-      <h2 class="panel__title">Conquistas</h2>
-      <!-- MOCK INICIO: conquistas fixas — remover quando vierem da API -->
-      <div class="achievements">
-        <app-tier-badge class="tier-badge tier-badge--bronze" [icon]="'fa-solid fa-award'" [label]="'Bronze'"></app-tier-badge>
-        <app-tier-badge class="tier-badge tier-badge--silver" [icon]="'fa-solid fa-award'" [label]="'Prata'"></app-tier-badge>
-        <app-tier-badge class="tier-badge tier-badge--gold" [icon]="'fa-solid fa-award'" [label]="'Ouro'"></app-tier-badge>
-        <app-tier-badge class="tier-badge tier-badge--locked" [icon]="'fa-solid fa-lock'" [label]="'Platina'"></app-tier-badge>
-        <app-tier-badge class="tier-badge tier-badge--locked" [icon]="'fa-solid fa-lock'" [label]="'Diamante'"></app-tier-badge>
-      </div>
-      <!-- MOCK FIM -->
-
-      <h2 class="panel__title panel__title--spaced">Atividade recente</h2>
-      <ul class="activity-list" app-activity-list [items]="recentActivity"></ul>
-    </div>
-  </div>
-</div>
 </app-shell>

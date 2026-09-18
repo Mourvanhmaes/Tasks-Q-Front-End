@@ -105,3 +105,7 @@
   .profile-columns { grid-template-columns: 1fr; padding-inline: var(--space-5); }
   .xp-progress-card { margin-inline: var(--space-5); }
 }
+
+.profile-columns--single {
+  grid-template-columns: 1fr;
+}
