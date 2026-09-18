@@ -1,0 +1,71 @@
+@use '../../../styles/dashboard-tokens' as *;
+@use '../../../styles/card-head';
+@use '../../../styles/progress-track';
+
+// Valores vindos de dashboard.component.scss. A regra do elemento raiz
+// (.stat-card) continua na pagina, porque bate no host.
+.stat-card__icon {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+.stat-card__icon--purple {
+  background: rgba(130, 71, 245, 0.18);
+  color: $purple-light;
+}
+.stat-card__icon--blue {
+  background: rgba(59, 130, 246, 0.16);
+  color: #5ba8ff;
+}
+
+.stat-card__figure {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-card__value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.trend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  i { font-size: 0.66rem; }
+}
+.trend-pill--danger { background: rgba(255, 99, 118, 0.12); color: $danger; }
+.trend-pill--success { background: rgba(52, 214, 122, 0.12); color: $green; }
+
+.stat-card__caption {
+  margin: 0;
+  font-size: 0.85rem;
+  color: $text-secondary;
+}
+
+.stat-card__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stat-card__total {
+  align-self: flex-end;
+  font-size: 0.76rem;
+  color: $text-tertiary;
+}

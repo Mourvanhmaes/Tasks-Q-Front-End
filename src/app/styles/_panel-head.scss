@@ -1,0 +1,64 @@
+@use 'dashboard-tokens' as *;
+
+// ------------------------------------------------------------
+// Cabecalho dos paineis grandes do dashboard — usado pela
+// propria pagina e pelo componente tasks-summary
+// ------------------------------------------------------------
+.panel__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.panel__head-text { min-width: 0; flex: 1; }
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.panel__title-icon {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+.panel__title-icon--purple { background: rgba(130, 71, 245, 0.18); color: $purple-light; }
+.panel__title-icon--gold { background: rgba(255, 201, 74, 0.14); color: $yellow; }
+
+.panel__subtitle {
+  margin: 0;
+  font-size: 0.83rem;
+  color: $text-tertiary;
+}
+
+.panel__link {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: $purple-light;
+  transition: color 180ms ease, transform 180ms ease;
+
+  i { font-size: 0.72rem; }
+}
+.panel__link:hover { color: #c39bff; transform: translateX(2px); }
+
+@media (max-width: 768px) {
+  .panel__head { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

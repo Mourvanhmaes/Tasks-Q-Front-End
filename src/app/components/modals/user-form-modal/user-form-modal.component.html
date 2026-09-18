@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h5 class="modal-title">Novo Usuario</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <div class="user-avatar-picker">
+    <span class="avatar avatar--lg">?</span>
+    <button type="button" mdbRipple class="btn btn-outline-light btn-sm">
+      <i class="fa-solid fa-camera me-2"></i>Alterar foto
+    </button>
+  </div>
+
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="usuarioNome" class="form-control" />
+    <label mdbLabel class="form-label" for="usuarioNome">Nome completo</label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="email" id="usuarioEmail" class="form-control" />
+    <label mdbLabel class="form-label" for="usuarioEmail">E-mail corporativo</label>
+  </mdb-form-control>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Cargo</label>
+      <select class="form-select">
+        <option>Administrador</option>
+        <option>Gerente de Projetos</option>
+        <option selected>Desenvolvedor(a)</option>
+        <option>Designer</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Status</label>
+      <select class="form-select">
+        <option selected>Ativo</option>
+        <option>Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <mdb-form-control class="mb-2">
+    <input mdbInput type="password" id="usuarioSenha" class="form-control" />
+    <label mdbLabel class="form-label" for="usuarioSenha">Senha provisoria</label>
+  </mdb-form-control>
+  <p class="form-hint">Deixe em branco para manter a senha atual ao editar.</p>
+</div>
+<div class="modal-footer">
+  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+  <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Salvar usuario</button>
+</div>

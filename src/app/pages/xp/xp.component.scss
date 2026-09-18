@@ -1,0 +1,199 @@
+.page { padding: 28px 36px; }
+
+// ============================================================
+// HERO — "Sua evolucao"
+// ============================================================
+.xp-hero {
+  position: relative;
+  background:
+    radial-gradient(circle at center, rgba(49, 71, 160, 0.16), transparent 45%),
+    var(--color-bg);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.xp-hero__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.xp-hero__title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-2);
+}
+.xp-hero__title-accent {
+  background: linear-gradient(90deg, #ffffff, #9b6cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.xp-hero__subtitle { font-size: 18px; color: #a8b3cf; margin: 0 0 6px; }
+.xp-hero__caption { font-size: 14px; color: #7e8aaa; margin: 0; max-width: 420px; }
+
+.xp-hero__quote {
+  max-width: 260px;
+  flex: none;
+  padding-top: var(--space-2);
+}
+.xp-hero__quote p {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-3);
+  line-height: 1.5;
+  text-align: right;
+}
+.xp-hero__quote::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-left: auto;
+  background: linear-gradient(90deg, transparent, var(--color-primary));
+}
+
+// ----- corpo do hero: cards / circulo / cards -----
+.xp-hero__side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+// Raiz do componente app-xp-metric-card (bate no host)
+.xp-metric-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 260px;
+  min-height: 90px;
+  background: rgba(20, 29, 58, .55);
+  border: 1px solid rgba(125, 145, 220, .15);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+// ----- circulo central de XP -----
+.xp-hero__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+// Raiz do componente app-xp-progress-ring (bate no host)
+.xp-progress-ring {
+  width: 340px;
+  height: 340px;
+  flex: none;
+  border-radius: 50%;
+  padding: 12px;
+  background: conic-gradient(from 0deg, #576cff 0deg, #9b6cff 257deg, rgba(255, 255, 255, .08) 257deg 360deg);
+  box-shadow: 0 0 30px rgba(76, 91, 255, .25), 0 0 70px rgba(100, 70, 255, .12);
+  display: flex;
+}
+
+.xp-progress-summary { text-align: center; }
+.xp-progress-summary__value { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
+.xp-progress-summary__sep { color: var(--color-text-muted); margin: 0 4px; font-weight: 400; }
+.xp-progress-summary__hint { display: block; font-size: 13px; color: #8995b2; margin-top: 4px; }
+
+// ============================================================
+// AVATAR (mantido para o ranking)
+// .avatar e classe global (styles.scss); como os avatares agora ficam
+// dentro do app-ranking-list, o override vale via ::ng-deep.
+// ============================================================
+:host ::ng-deep .avatar {
+  border-radius: var(--radius-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  flex: none;
+}
+:host ::ng-deep .avatar--lg { width: 64px; height: 64px; font-size: 1.3rem; }
+:host ::ng-deep .avatar--sm { width: 32px; height: 32px; font-size: 0.7rem; }
+
+// ============================================================
+// RANKING
+// As linhas (.ranking-row*) e os selos de tier foram para
+// ranking-list.component.scss junto com o markup.
+// ============================================================
+.ranking-card {
+  background: rgba(15, 23, 48, .72);
+  border: 1px solid rgba(128, 145, 210, .12);
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+.ranking-card__header { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-4); }
+.ranking-card__title {
+  font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary); margin: 0 0 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ranking-card__title-icon { color: var(--tier-gold); font-size: 1rem; }
+.ranking-card__subtitle { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; }
+.ranking-card__select {
+  max-width: 150px;
+  flex: none;
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: none;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 6px 14px;
+}
+
+.ranking-list__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+  margin-bottom: var(--space-2);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+.ranking-list__header-position { width: 28px; text-align: center; flex: none; }
+.ranking-list__header-avatar { width: 32px; flex: none; }
+.ranking-list__header-user { flex: 1 1 30%; min-width: 0; }
+.ranking-list__header-role { flex: 1 1 25%; min-width: 0; }
+.ranking-list__header-badge { width: 100px; flex: none; }
+.ranking-list__header-xp { width: 100px; flex: none; text-align: right; }
+
+// Raiz do componente app-ranking-list (bate no host)
+.ranking-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+
+// ============================================================
+// RESPONSIVIDADE
+// ============================================================
+@media (max-width: 1200px) {
+  .xp-progress-ring { width: 290px; height: 290px; }
+}
+
+@media (max-width: 900px) {
+  .page { padding: var(--space-5) var(--space-4); }
+  .xp-hero__top { flex-direction: column; }
+  .xp-hero__quote { max-width: 100%; }
+  .xp-hero__quote p { text-align: left; }
+  .xp-hero__quote::after { margin-left: 0; }
+  .ranking-list__header-role { display: none; }
+}
+
+@media (max-width: 700px) {
+  .xp-progress-ring { width: 240px; height: 240px; }
+  .xp-metric-card { max-width: 100%; }
+}

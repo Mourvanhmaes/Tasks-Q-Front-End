@@ -1,0 +1,13 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+@if (variant === 'member') {
+  @for (item of initials; track $index) {
+    <span class="member-avatar">{{ item }}</span>
+  }
+  @if (more) {
+    <span class="member-avatar member-avatar--more">{{ more }}</span>
+  }
+} @else {
+  @for (item of initials; track $index) {
+    <span class="avatar">{{ item }}</span>
+  }
+}

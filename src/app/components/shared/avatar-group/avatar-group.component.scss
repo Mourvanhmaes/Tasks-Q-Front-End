@@ -1,0 +1,18 @@
+@use '../../../styles/member-avatar' as *;
+
+// ------------------------------------------------------------
+// Variante member — valores vindos de dashboard.component.scss
+// ------------------------------------------------------------
+:host(.member-avatar-group) {
+  display: flex;
+  align-items: center;
+}
+:host(.member-avatar-group) .member-avatar + .member-avatar { margin-left: -9px; }
+
+// ------------------------------------------------------------
+// Variante project — apenas o empilhamento. O tamanho do .avatar e
+// global (styles.scss) com override na propria tela de /projects.
+// ------------------------------------------------------------
+:host(.avatar-group) { display: flex; }
+:host(.avatar-group) .avatar { margin-left: -10px; }
+:host(.avatar-group) .avatar:first-child { margin-left: 0; }

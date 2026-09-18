@@ -1,0 +1,129 @@
+@if (task(); as task) {
+
+  <div class="modal-header task-modal__topbar">
+    @if (task.concluded) {
+      <span class="task-modal__list-badge task-modal__list-badge--concluded">
+        <i class="fa-solid fa-circle-check me-2"></i>Concluida
+      </span>
+    } @else {
+      <select class="task-modal__status-select" aria-label="Mover tarefa" (change)="changeStatus($event, task)">
+        @for (option of statuses; track option.status) {
+          <option [value]="option.status" [selected]="option.status === task.status">{{ option.title }}</option>
+        }
+      </select>
+    }
+    <button type="button" mdbRipple class="task-modal__close" (click)="modalRef.close()" title="Fechar" aria-label="Fechar">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <div class="modal-body task-modal__body">
+
+    <h2 class="task-modal__title">{{ task.title }}</h2>
+
+    <div class="task-modal__quick-actions">
+      <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm"><i class="fa-solid fa-plus me-2"></i>Adicionar</button>
+      <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm"><i class="fa-solid fa-tag me-2"></i>Etiquetas</button>
+      <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm"><i class="fa-regular fa-calendar me-2"></i>Datas</button>
+      <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm"><i class="fa-solid fa-square-check me-2"></i>Checklist</button>
+      <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm"><i class="fa-solid fa-user-plus me-2"></i>Membros</button>
+    </div>
+
+    <div class="task-modal__attributes">
+      <div class="task-modal__attribute">
+        <span class="task-modal__attribute-label">Etiquetas</span>
+        <div class="task-modal__attribute-value">
+          <span class="badge badge--priority-{{ task.priority }}">{{ task.priority | titlecase }}</span>
+          @if (task.overdue) {
+            <span class="badge badge--danger">Atrasada</span>
+          }
+        </div>
+      </div>
+
+      <div class="task-modal__attribute">
+        <span class="task-modal__attribute-label">Projeto</span>
+        <div class="task-modal__attribute-value">
+          <span>{{ projectName(task) }}</span>
+        </div>
+      </div>
+
+      <div class="task-modal__attribute">
+        <span class="task-modal__attribute-label">Membros</span>
+        <div class="task-modal__attribute-value">
+          <span class="avatar avatar--sm">{{ assigneeInitials(task) }}</span>
+          <span>{{ assigneeName(task) }}</span>
+        </div>
+      </div>
+
+      <div class="task-modal__attribute">
+        <span class="task-modal__attribute-label">Datas</span>
+        <div class="task-modal__attribute-value">
+          <span class="task-modal__date-chip" [class.task-modal__date-chip--overdue]="task.overdue">
+            <i class="fa-regular fa-calendar-days me-1"></i>{{ task.dueLabel }}
+          </span>
+        </div>
+      </div>
+
+      <div class="task-modal__attribute">
+        <span class="task-modal__attribute-label">Recompensa</span>
+        <div class="task-modal__attribute-value">
+          <span class="task-modal__xp-chip"><i class="fa-solid fa-bolt me-1"></i>+{{ task.xp }} XP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-modal__section">
+      <div class="task-modal__section-header">
+        <i class="fa-solid fa-align-left"></i>
+        <h3 class="task-modal__section-title">Descricao</h3>
+        <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm ms-auto">Editar</button>
+      </div>
+      <p class="task-modal__description">{{ task.description }}</p>
+    </div>
+
+    <div class="task-modal__section">
+      <div class="task-modal__section-header">
+        <i class="fa-regular fa-clock"></i>
+        <h3 class="task-modal__section-title">Detalhes</h3>
+      </div>
+      <div class="task-modal__timestamps">
+        <span><i class="fa-solid fa-user-shield me-2"></i>Responsavel pelo projeto: {{ ownerName(task) }}</span>
+        @if (task.concluded) {
+          <span class="task-modal__concluded-note">
+            <i class="fa-solid fa-circle-check me-2"></i>Concluida por {{ concludedBy(task) }} em {{ task.concludedAtLabel }}
+          </span>
+        }
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer justify-content-between">
+    <button type="button" mdbRipple class="btn btn-danger" (click)="modalRef.close('delete')">
+      <i class="fa-solid fa-trash me-2"></i>Excluir tarefa
+    </button>
+
+    <div class="task-modal__footer-actions">
+      @if (task.status === 'done' && !task.concluded) {
+        @if (canConclude(task)) {
+          <button type="button" mdbRipple class="btn task-modal__conclude" (click)="conclude(task)">
+            <i class="fa-solid fa-circle-check me-2"></i>Concluir tarefa
+          </button>
+        } @else {
+          <span class="task-modal__locked">
+            <i class="fa-solid fa-lock me-2"></i>Somente o administrador ou o responsavel pelo projeto pode concluir
+          </span>
+        }
+      }
+
+      @if (task.concluded && canConclude(task)) {
+        <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="reopen(task)">
+          <i class="fa-solid fa-rotate-left me-2"></i>Reabrir
+        </button>
+      }
+
+      <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Fechar</button>
+    </div>
+  </div>
+
+}

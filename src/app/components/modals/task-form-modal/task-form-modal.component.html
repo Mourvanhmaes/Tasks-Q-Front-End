@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h5 class="modal-title">Nova Tarefa</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="tarefaTitulo" class="form-control" />
+    <label mdbLabel class="form-label" for="tarefaTitulo">Titulo da tarefa</label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <textarea mdbInput id="tarefaDescricao" class="form-control" rows="3"></textarea>
+    <label mdbLabel class="form-label" for="tarefaDescricao">Descricao</label>
+  </mdb-form-control>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Projeto</label>
+      <select class="form-select">
+        <option selected>Portal do Cliente</option>
+        <option>App Mobile Cabanos</option>
+        <option>Site Institucional</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Responsavel</label>
+      <select class="form-select">
+        <option>Mariana Ferreira</option>
+        <option selected>Rafael Andrade</option>
+        <option>Julia Santos</option>
+        <option>Thiago Pereira</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prioridade</label>
+      <select class="form-select">
+        <option>Baixa</option>
+        <option selected>Media</option>
+        <option>Alta</option>
+        <option>Urgente</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prazo</label>
+      <input type="date" class="form-control" />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+  <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Salvar tarefa</button>
+</div>

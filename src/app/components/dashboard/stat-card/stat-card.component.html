@@ -1,0 +1,26 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+<div class="card-head">
+  <span class="stat-card__icon stat-card__icon--{{ data.iconModifier }}">
+    <i class="{{ data.icon }}" aria-hidden="true"></i>
+  </span>
+  <h2 class="card-head__title card-head__title--lead">{{ data.title }}</h2>
+  <button type="button" class="card-head__menu" aria-label="Opções do card" (click)="menu.emit()">
+    <i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+  </button>
+</div>
+
+<div class="stat-card__figure">
+  <span class="stat-card__value">{{ data.value }}</span>
+  <span class="trend-pill trend-pill--{{ data.trendModifier }}">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i> {{ data.trendLabel }}
+  </span>
+</div>
+
+<p class="stat-card__caption">{{ data.caption }}</p>
+
+<div class="stat-card__footer">
+  <div class="progress-track">
+    <span class="progress-track__fill progress-track__fill--{{ data.progressModifier }}" [style]="'--progress: ' + data.progress"></span>
+  </div>
+  <span class="stat-card__total">{{ data.total }}</span>
+</div>

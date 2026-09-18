@@ -1,0 +1,39 @@
+// Valores vindos de profile.component.scss. A regra do elemento raiz
+// (.profile-banner) continua na pagina, assim como os overrides de
+// .avatar/.avatar--xl e de .tier-badge, que sao usados tambem fora daqui.
+.profile-banner__cover {
+  height: 150px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(183, 139, 255, 0.4), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(217, 247, 106, 0.15), transparent 45%),
+    linear-gradient(120deg, #171a24, var(--color-dark));
+}
+.profile-banner__content {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-5);
+  padding: 0 var(--space-7);
+  margin-top: -48px;
+}
+.profile-avatar { position: relative; flex: none; }
+.profile-avatar__edit {
+  position: absolute; bottom: 2px; right: 2px;
+  width: 30px; height: 30px; border-radius: var(--radius-full);
+  background: var(--color-surface-2); border: 2px solid var(--color-bg);
+  color: var(--color-text-primary); display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+}
+.profile-banner__info { flex: 1; padding-bottom: var(--space-2); }
+.profile-banner__name { font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary); margin: 0 0 2px; }
+.profile-banner__role { color: var(--color-text-secondary); font-size: 0.9rem; margin: 0 0 var(--space-2); }
+.profile-banner__edit-btn {
+  align-self: flex-end;
+  margin-bottom: var(--space-2);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+.profile-banner__edit-btn:hover { background: var(--color-surface-2); }
+
+@media (max-width: 900px) {
+  .profile-banner__content { padding-inline: var(--space-5); flex-wrap: wrap; }
+}

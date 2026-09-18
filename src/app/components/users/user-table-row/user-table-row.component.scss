@@ -1,0 +1,188 @@
+// Valores vindos de users.component.scss. Os seletores usam :host porque o
+// host e o proprio <tr>; o que sobrou na pagina sao as regras do <thead>,
+// da tabela e os overrides de classes globais (.avatar).
+$border-row: rgba(255, 255, 255, 0.05);
+$border-strong: #3a4358;
+
+$text-primary: #f6f7fb;
+$text-email: #97a3bb;
+$text-action: #d7dcea;
+
+$purple: #7c3aed;
+$green: #31d875;
+$red: #ff6376;
+
+$row-h: 60px;
+
+// Reset comum dos controles construidos com <button> (parte do .row-action)
+.row-action {
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+// ------------------------------------------------------------
+// Celulas
+// ------------------------------------------------------------
+:host > td {
+  height: $row-h;
+  padding: 0 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-row;
+  box-shadow: none;
+  font-size: 0.86rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+:host(:hover) > td { background: rgba(255, 255, 255, 0.015); }
+:host(:last-child) > td { border-bottom: none; }
+
+:host > td.users-table__col-check {
+  width: 52px;
+  padding-right: 0;
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.user-cell__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.cell-email { font-size: 0.84rem; color: $text-email; }
+.cell-role { font-size: 0.86rem; color: #ffffff; }
+
+// ------------------------------------------------------------
+// Checkbox
+// ------------------------------------------------------------
+.table-check {
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #506078;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+
+  &:hover { border-color: #6c7d99; }
+
+  &:checked {
+    background: $purple;
+    border-color: $purple;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 4px;
+      height: 8px;
+      border: solid #ffffff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+  }
+}
+
+// ------------------------------------------------------------
+// Badges de rank (o host do app-tier-badge fica neste template)
+// ------------------------------------------------------------
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+// o <i> esta dentro do app-tier-badge, por isso o ::ng-deep
+.tier-badge ::ng-deep i { font-size: 0.72rem; }
+
+.tier-badge--gold { background: #ffd400; color: #493600; }
+.tier-badge--platinum { background: #bceeff; color: #27556b; }
+.tier-badge--silver { background: #d2d5da; color: #5a5d63; }
+.tier-badge--bronze { background: #f28a2e; color: #ffffff; }
+.tier-badge--diamond {
+  background: linear-gradient(135deg, #b67aff, #d8b8ff);
+  color: #4c2482;
+}
+
+// ------------------------------------------------------------
+// Status e 2FA
+// ------------------------------------------------------------
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.status-pill__dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-pill--active { background: rgba(34, 197, 94, 0.13); color: $green; }
+.status-pill--off { background: rgba(100, 116, 139, 0.18); color: #a9b3c7; }
+
+// ------------------------------------------------------------
+// Acoes da linha
+// ------------------------------------------------------------
+.row-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.row-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid $border-strong;
+  border-radius: 8px;
+  background: transparent;
+  color: $text-action;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+
+  i { font-size: 0.74rem; }
+
+  &:hover { background: rgba(255, 255, 255, 0.04); color: #ffffff; }
+}
+
+.row-action--danger:hover {
+  background: rgba(255, 99, 118, 0.10);
+  border-color: rgba(255, 99, 118, 0.45);
+  color: $red;
+}

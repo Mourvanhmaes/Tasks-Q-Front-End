@@ -1,0 +1,102 @@
+// Valores vindos de tasks.component.scss. As regras do elemento raiz
+// (.card, .card:hover, .card--concluded, .card--dragging) continuam na
+// pagina, porque batem no host.
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.card__title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: 2px;
+}
+
+.card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.card__deadline {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.card__deadline--overdue { color: var(--color-danger); font-weight: 600; }
+
+.card__xp-reward {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--xp-glow);
+  flex: none;
+}
+
+.card__project {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+}
+
+.card__status-tag { align-self: flex-start; }
+
+// ----- acoes de status no card -----
+.card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border-subtle);
+  cursor: default;
+}
+.card__actions:empty { display: none; }
+
+.card__conclude {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+  font-weight: 600;
+}
+.card__conclude:hover { background: var(--color-success); color: var(--color-dark); }
+.card__conclude:focus { box-shadow: none; }
+.card__conclude:focus-visible { outline: 2px solid var(--color-success); outline-offset: 2px; }
+
+.card__locked {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+:host(.card--concluded) .card__title { text-decoration: line-through; color: var(--color-text-secondary); }
