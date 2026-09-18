@@ -140,4 +140,18 @@ openStatusModal(usuario: UserTableRow): void {
     }
   });
 }
+get temFiltrosAtivos(): boolean {
+  return Boolean(
+    this.busca ||
+    this.cargoSelecionado ||
+    this.statusSelecionado
+  );
+}
+
+limparFiltros(): void {
+  this.busca = '';
+  this.cargoSelecionado = '';
+  this.statusSelecionado = '';
+  this.aplicarFiltros();
+}
 }

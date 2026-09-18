@@ -3,11 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import {
-  CargoApiResponse,
-  UserTableRow
-} from '../../../models/users';
+import {CargoApiResponse,UserTableRow } from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-form-modal',
@@ -60,20 +58,34 @@ export class UserFormModalComponent implements OnInit {
   }
 
 salvar(): void {
+  const nome = this.nome.trim();
+  const email = this.email.trim();
   const cargoId = this.cargoId;
 
-  const dadosInvalidos =
-    !this.nome.trim() ||
-    !this.email.trim() ||
-    cargoId === null;
+  if (nome.length < 3) {
+    this.erro = 'O nome deve possuir pelo menos 3 caracteres.';
+    return;
+  }
 
-  const senhaInvalida =
-    !this.modoEdicao && this.senha.length < 8;
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  if (dadosInvalidos || senhaInvalida) {
-    this.erro = this.modoEdicao
-      ? 'Preencha todos os campos.'
-      : 'Preencha os campos e use uma senha com pelo menos 8 caracteres.';
+  if (!emailValido) {
+    this.erro = 'Informe um e-mail válido. Exemplo: usuario@email.com';
+    return;
+  }
+
+  if (cargoId === null) {
+    this.erro = 'Selecione um cargo.';
+    return;
+  }
+
+  if (!this.modoEdicao && this.senha.length < 8) {
+    this.erro = 'A senha deve possuir pelo menos 8 caracteres.';
+    return;
+  }
+
+  if (!this.modoEdicao && this.senha.length > 72) {
+    this.erro = 'A senha deve possuir no máximo 72 caracteres.';
     return;
   }
 
@@ -81,8 +93,8 @@ salvar(): void {
   this.erro = '';
 
   const dados = {
-    nome: this.nome.trim(),
-    email: this.email.trim(),
+    nome,
+    email,
     cargoId,
     status: this.status,
     urlAvatar: null
@@ -97,8 +109,20 @@ salvar(): void {
 
   requisicao.subscribe({
     next: usuario => this.modalRef.close(usuario),
-    error: () => {
+
+    error: (erro: HttpErrorResponse) => {
       this.salvando = false;
+
+      if (erro.status === 409) {
+        this.erro = 'Já existe um usuário cadastrado com este e-mail.';
+        return;
+      }
+
+      if (erro.status === 400) {
+        this.erro = 'Os dados informados são inválidos. Verifique os campos.';
+        return;
+      }
+
       this.erro = this.modoEdicao
         ? 'Não foi possível atualizar o usuário.'
         : 'Não foi possível cadastrar o usuário.';

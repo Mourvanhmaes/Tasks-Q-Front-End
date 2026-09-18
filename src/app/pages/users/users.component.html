@@ -87,15 +87,17 @@
         </i>
       </div>
 
-      <button
-        type="button"
-        mdbRipple
-        class="toolbar-btn"
-        (click)="aplicarFiltros()">
+       
+<button
+  type="button"
+  mdbRipple
+  class="toolbar-btn"
+  [disabled]="!temFiltrosAtivos"
+  (click)="limparFiltros()">
 
-        <i class="fa-solid fa-filter" aria-hidden="true"></i>
-        Filtros
-      </button>
+  <i class="fa-solid fa-filter-circle-xmark" aria-hidden="true"></i>
+  Limpar filtros
+</button>
     </div>
 
     <section class="table-card">
