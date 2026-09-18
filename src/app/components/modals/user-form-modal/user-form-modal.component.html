@@ -1,51 +1,118 @@
 <div class="modal-header">
-  <h5 class="modal-title">Novo Usuario</h5>
-  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+  <h5 class="modal-title">Novo Usuário</h5>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn-close btn-close-white"
+    (click)="modalRef.close()"
+    aria-label="Fechar">
+  </button>
 </div>
+
 <div class="modal-body">
   <div class="user-avatar-picker">
     <span class="avatar avatar--lg">?</span>
-    <button type="button" mdbRipple class="btn btn-outline-light btn-sm">
-      <i class="fa-solid fa-camera me-2"></i>Alterar foto
-    </button>
   </div>
 
   <mdb-form-control class="mb-3">
-    <input mdbInput type="text" id="usuarioNome" class="form-control" />
-    <label mdbLabel class="form-label" for="usuarioNome">Nome completo</label>
+    <input
+      mdbInput
+      type="text"
+      id="usuarioNome"
+      name="nome"
+      class="form-control"
+      [(ngModel)]="nome" />
+
+    <label mdbLabel class="form-label" for="usuarioNome">
+      Nome completo
+    </label>
   </mdb-form-control>
 
   <mdb-form-control class="mb-3">
-    <input mdbInput type="email" id="usuarioEmail" class="form-control" />
-    <label mdbLabel class="form-label" for="usuarioEmail">E-mail corporativo</label>
+    <input
+      mdbInput
+      type="email"
+      id="usuarioEmail"
+      name="email"
+      class="form-control"
+      [(ngModel)]="email" />
+
+    <label mdbLabel class="form-label" for="usuarioEmail">
+      E-mail
+    </label>
   </mdb-form-control>
 
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label-select">Cargo</label>
-      <select class="form-select">
-        <option>Administrador</option>
-        <option>Gerente de Projetos</option>
-        <option selected>Desenvolvedor(a)</option>
-        <option>Designer</option>
+
+      <select
+        class="form-select"
+        name="cargoId"
+        [(ngModel)]="cargoId">
+
+        <option [ngValue]="null" disabled>Selecione</option>
+
+        @for (cargo of cargos; track cargo.id) {
+          <option [ngValue]="cargo.id">{{ cargo.nome }}</option>
+        }
       </select>
     </div>
+
     <div class="col-md-6 mb-3">
       <label class="form-label-select">Status</label>
-      <select class="form-select">
-        <option selected>Ativo</option>
-        <option>Inativo</option>
+
+      <select
+        class="form-select"
+        name="status"
+        [(ngModel)]="status">
+
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
       </select>
     </div>
   </div>
 
   <mdb-form-control class="mb-2">
-    <input mdbInput type="password" id="usuarioSenha" class="form-control" />
-    <label mdbLabel class="form-label" for="usuarioSenha">Senha provisoria</label>
+    <input
+      mdbInput
+      type="password"
+      id="usuarioSenha"
+      name="senha"
+      class="form-control"
+      minlength="8"
+      [(ngModel)]="senha" />
+
+    <label mdbLabel class="form-label" for="usuarioSenha">
+      Senha provisória
+    </label>
   </mdb-form-control>
-  <p class="form-hint">Deixe em branco para manter a senha atual ao editar.</p>
+
+  @if (erro) {
+    <div class="alert alert-danger mt-3">
+      {{ erro }}
+    </div>
+  }
 </div>
+
 <div class="modal-footer">
-  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
-  <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Salvar usuario</button>
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-secondary-ghost"
+    (click)="modalRef.close()">
+
+    Cancelar
+  </button>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-primary"
+    [disabled]="salvando"
+    (click)="salvar()">
+
+    {{ salvando ? 'Salvando...' : 'Salvar usuário' }}
+  </button>
 </div>

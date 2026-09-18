@@ -6,13 +6,13 @@ export interface Users {
   initials: string;
   email: string;
   role: UserRole;
-  /** Cargo exibido na interface (ex.: Gerente de Projetos) */
   roleLabel: string;
 }
-
-// MOCK: interface criada apenas para tipar a linha da tabela de /users.
-// Rank, status e 2FA ainda nao existem em Users nem em nenhum service.
+ 
 export interface UserTableRow {
+  id: number;
+ cargoId: number;
+  status: 'ATIVO' | 'INATIVO';
   name: string;
   initials: string;
   avatarModifier: 'purple' | 'blue' | 'pink' | 'orange' | 'violet' | 'green';
@@ -22,6 +22,36 @@ export interface UserTableRow {
   tierModifier: 'gold' | 'platinum' | 'silver' | 'bronze' | 'diamond';
   statusLabel: string;
   statusModifier: 'active' | 'off';
-  twoFactorLabel: string;
-  twoFactorModifier: 'active' | 'off';
 }
+
+
+export interface UserApiResponse {
+  id: number;
+  nome: string;
+  email: string;
+  urlAvatar: string | null;
+  cargo: {
+    id: number;
+    nome: string;
+  };
+  status: 'ATIVO' | 'INATIVO';
+  xp: number;
+  elo: 'INICIANTE' | 'JUNIOR' | 'PLENO' | 'ESPECIALISTA' | 'LEGACY';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CargoApiResponse {
+  id: number;
+  nome: string;
+}
+
+export interface UserCreateRequest {
+  nome: string;
+  email: string;
+  senha: string;
+  cargoId: number;
+  status: 'ATIVO' | 'INATIVO';
+  urlAvatar: string | null;
+}
+

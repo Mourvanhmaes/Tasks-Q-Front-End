@@ -1,38 +1,68 @@
-<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
 <td class="users-table__col-check">
-  <input type="checkbox" class="table-check" attr.aria-label="Selecionar {{ user.name }}" />
+  <input
+    type="checkbox"
+    class="table-check"
+    attr.aria-label="Selecionar {{ user.name }}" />
 </td>
+
 <td>
   <div class="user-cell">
-    <span class="avatar avatar--{{ user.avatarModifier }}">{{ user.initials }}</span>
-    <span class="user-cell__name">{{ user.name }}</span>
+    <span class="avatar avatar--{{ user.avatarModifier }}">
+      {{ user.initials }}
+    </span>
+
+    <span class="user-cell__name">
+      {{ user.name }}
+    </span>
   </div>
 </td>
-<td class="cell-email">{{ user.email }}</td>
-<td class="cell-role">{{ user.roleLabel }}</td>
+
+<td class="cell-email">
+  {{ user.email }}
+</td>
+
+<td class="cell-role">
+  {{ user.roleLabel }}
+</td>
+
 <td>
   <app-tier-badge
     class="tier-badge tier-badge--{{ user.tierModifier }}"
     [icon]="'fa-solid fa-medal'"
-    [label]="user.tierLabel"></app-tier-badge>
+    [label]="user.tierLabel">
+  </app-tier-badge>
 </td>
+
 <td>
   <span class="status-pill status-pill--{{ user.statusModifier }}">
-    <span class="status-pill__dot" aria-hidden="true"></span>{{ user.statusLabel }}
+    <span class="status-pill__dot" aria-hidden="true"></span>
+    {{ user.statusLabel }}
   </span>
 </td>
-<td>
-  <span class="status-pill status-pill--{{ user.twoFactorModifier }}">
-    <span class="status-pill__dot" aria-hidden="true"></span>{{ user.twoFactorLabel }}
-  </span>
-</td>
+
 <td class="text-end">
   <div class="row-actions">
-    <button type="button" mdbRipple class="row-action" (click)="edit.emit()" title="Editar">
-      <i class="fa-solid fa-pen" aria-hidden="true"></i>Editar
+    <button
+      type="button"
+      mdbRipple
+      class="row-action"
+      (click)="edit.emit()"
+      title="Editar">
+
+      <i class="fa-solid fa-pen" aria-hidden="true"></i>
+      Editar
     </button>
-    <button type="button" mdbRipple class="row-action row-action--danger" (click)="remove.emit()" title="Excluir">
-      <i class="fa-solid fa-trash" aria-hidden="true"></i>Excluir
+
+    <button
+      type="button"
+      mdbRipple
+      class="row-action row-action--danger"
+      (click)="remove.emit()"
+      [disabled]="user.status === 'INATIVO'"
+      title="Inativar">
+
+      <i class="fa-solid fa-user-slash" aria-hidden="true"></i>
+      {{ user.status === 'INATIVO' ? 'Inativo' : 'Inativar' }}
     </button>
   </div>
 </td>
