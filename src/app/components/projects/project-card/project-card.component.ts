@@ -1,16 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import { ProjectCardData } from '../../../models/project';
 import { AvatarGroupComponent } from '../../shared/avatar-group/avatar-group.component';
+import { ProjectResponse } from '../../../models/project/project-response';
 
-/**
- * Card da grade de /projects.
- *
- * Nao injeta service nem abre modal: as acoes saem por @Output.
- * Quem usa escreve a classe no host:
- *   <app-project-card class="project-card" ...>
- */
 @Component({
   selector: 'app-project-card',
   imports: [RouterLink, MdbRippleModule, AvatarGroupComponent],
@@ -19,7 +12,7 @@ import { AvatarGroupComponent } from '../../shared/avatar-group/avatar-group.com
 })
 export class ProjectCardComponent {
 
-  @Input() project!: ProjectCardData;
+  @Input() project!: ProjectResponse;
 
   @Output() edit = new EventEmitter<void>();
 
