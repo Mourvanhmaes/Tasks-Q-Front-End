@@ -51,19 +51,35 @@
     <div class="col-md-6 mb-3">
       <label class="form-label-select">Cargo</label>
 
-      <select
-        class="form-select"
-        name="cargoId"
-        [(ngModel)]="cargoId">
+      @if (cargos.length > 0 || modoEdicao) {
+        <select
+          class="form-select"
+          name="cargoId"
+          [(ngModel)]="cargoId">
 
-        <option [ngValue]="null" disabled>Selecione</option>
+          <option [ngValue]="null" disabled>Selecione</option>
 
-        @for (cargo of cargos; track cargo.id) {
-          <option [ngValue]="cargo.id">
-            {{ cargo.nome }}
-          </option>
-        }
-      </select>
+          @for (cargo of cargos; track cargo.id) {
+            <option [ngValue]="cargo.id">
+              {{ cargo.nome }}
+            </option>
+          }
+
+          @if (!modoEdicao) {
+            <option [ngValue]="-1">Criar novo cargo</option>
+          }
+        </select>
+      }
+
+      @if (!modoEdicao && (cargos.length === 0 || cargoId === -1)) {
+        <input
+          type="text"
+          class="form-control"
+          name="nomeNovoCargo"
+          placeholder="Nome do novo cargo"
+          [(ngModel)]="nomeNovoCargo" />
+        <small class="text-muted">O cargo será criado antes do usuário.</small>
+      }
     </div>
 
     <div class="col-md-6 mb-3">

@@ -46,6 +46,10 @@ export interface CargoApiResponse {
   nome: string;
 }
 
+export interface CargoCreateRequest {
+  nome: string;
+}
+
 export interface UserCreateRequest {
   nome: string;
   email: string;

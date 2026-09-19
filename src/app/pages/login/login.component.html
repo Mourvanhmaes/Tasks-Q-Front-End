@@ -18,14 +18,14 @@
       <h2 class="login-card__title">Bem-vindo de volta</h2>
       <p class="login-card__subtitle">Entre com suas credenciais para acessar o Tasks-Q.</p>
 
-      <form class="login-form">
+      <form class="login-form" (ngSubmit)="entrar()">
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="loginEmail" class="form-control form-control-lg" />
+          <input mdbInput type="email" id="loginEmail" name="email" class="form-control form-control-lg" [(ngModel)]="email" />
           <label mdbLabel class="form-label" for="loginEmail">E-mail corporativo</label>
         </mdb-form-control>
 
         <mdb-form-control class="mb-3">
-          <input mdbInput type="password" id="loginSenha" class="form-control form-control-lg" />
+          <input mdbInput type="password" id="loginSenha" name="senha" class="form-control form-control-lg" [(ngModel)]="senha" />
           <label mdbLabel class="form-label" for="loginSenha">Senha</label>
         </mdb-form-control>
 
@@ -37,7 +37,11 @@
           <a href="#" class="login-form__forgot">Esqueceu a senha?</a>
         </div>
 
-        <button type="button" mdbRipple class="btn btn-primary btn-lg w-100 login-form__submit">
+        @if (erro) {
+          <div class="alert alert-danger mb-3">{{ erro }}</div>
+        }
+
+        <button type="submit" mdbRipple class="btn btn-primary btn-lg w-100 login-form__submit">
           Entrar
           <i class="fa-solid fa-arrow-right-long ms-2"></i>
         </button>
