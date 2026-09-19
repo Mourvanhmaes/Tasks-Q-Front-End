@@ -1,0 +1,42 @@
+<aside class="sidebar">
+  <div class="sidebar__brand">
+    <span class="sidebar__brand-mark"><i class="fa-solid fa-layer-group"></i></span>
+    <span class="sidebar__brand-text">Tasks<span>Q</span></span>
+  </div>
+
+  <nav class="sidebar__nav">
+    <a routerLink="/dashboard" routerLinkActive="sidebar__link--active" class="sidebar__link">
+      <i class="fa-solid fa-table-columns"></i>
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/xp" routerLinkActive="sidebar__link--active" class="sidebar__link">
+      <i class="fa-solid fa-bolt"></i>
+      <span>XP</span>
+    </a>
+    <a routerLink="/tasks" routerLinkActive="sidebar__link--active" class="sidebar__link">
+      <i class="fa-solid fa-list-check"></i>
+      <span>Tarefas</span>
+    </a>
+    <a routerLink="/projects" routerLinkActive="sidebar__link--active" class="sidebar__link">
+      <i class="fa-solid fa-diagram-project"></i>
+      <span>Projetos</span>
+    </a>
+    <a routerLink="/users" routerLinkActive="sidebar__link--active" class="sidebar__link">
+      <i class="fa-solid fa-users"></i>
+      <span>Usuários</span>
+    </a>
+  </nav>
+
+  <div class="sidebar__footer">
+    <a class="sidebar__user" routerLink="/profile/1">
+      <span class="avatar">MF</span>
+      <span class="sidebar__user-info">
+        <span class="sidebar__user-name">Mariana Ferreira</span>
+        <span class="sidebar__user-role">Gerente de Projetos</span>
+      </span>
+    </a>
+    <a routerLink="/login" class="sidebar__logout" aria-label="Sair" title="Sair">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </a>
+  </div>
+</aside>

@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h5 class="modal-title">Atribuir Usuarios</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="buscaAtribuir" class="form-control" />
+    <label mdbLabel class="form-label" for="buscaAtribuir">Buscar usuario</label>
+  </mdb-form-control>
+
+  <ul class="assign-list">
+    <li class="assign-list__item">
+      <input class="form-check-input" type="checkbox" id="atribuir1" checked />
+      <span class="avatar avatar--sm">MF</span>
+      <label for="atribuir1">
+        <span class="assign-list__name">Mariana Ferreira</span>
+        <span class="assign-list__role">Gerente de Projetos</span>
+      </label>
+    </li>
+    <li class="assign-list__item">
+      <input class="form-check-input" type="checkbox" id="atribuir2" checked />
+      <span class="avatar avatar--sm">RA</span>
+      <label for="atribuir2">
+        <span class="assign-list__name">Rafael Andrade</span>
+        <span class="assign-list__role">Desenvolvedor(a)</span>
+      </label>
+    </li>
+    <li class="assign-list__item">
+      <input class="form-check-input" type="checkbox" id="atribuir3" />
+      <span class="avatar avatar--sm">JS</span>
+      <label for="atribuir3">
+        <span class="assign-list__name">Julia Santos</span>
+        <span class="assign-list__role">Designer</span>
+      </label>
+    </li>
+    <li class="assign-list__item">
+      <input class="form-check-input" type="checkbox" id="atribuir4" />
+      <span class="avatar avatar--sm">TP</span>
+      <label for="atribuir4">
+        <span class="assign-list__name">Thiago Pereira</span>
+        <span class="assign-list__role">Desenvolvedor(a)</span>
+      </label>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+  <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Salvar equipe</button>
+</div>

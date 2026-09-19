@@ -1,0 +1,135 @@
+@use '../../../styles/dashboard-tokens' as *;
+@use '../../../styles/progress-track';
+
+// Valores vindos de dashboard.component.scss. As regras do elemento raiz
+// (.project-item, .project-item:hover) continuam na pagina, porque batem
+// no host.
+.project-item__icon {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+.project-item__icon--purple { background: rgba(130, 71, 245, 0.18); color: $purple-light; }
+.project-item__icon--violet { background: rgba(169, 112, 255, 0.14); color: #b98bff; }
+.project-item__icon--blue { background: rgba(59, 130, 246, 0.16); color: #5ba8ff; }
+
+.project-item__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-item__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-item__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.project-item__desc {
+  margin: 0;
+  font-size: 0.84rem;
+  color: $text-tertiary;
+}
+
+.project-item__meta {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    color: $text-tertiary;
+  }
+  i { font-size: 0.76rem; color: $text-tertiary; }
+}
+.project-item__meta-alert { color: $danger !important; i { color: $danger; } }
+.project-item__meta-done { color: $green !important; i { color: $green; } }
+
+.project-item__side {
+  flex: 0 0 auto;
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.project-item__progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-item__percent {
+  flex: none;
+  min-width: 38px;
+  text-align: right;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.project-item__chevron {
+  flex: none;
+  font-size: 0.85rem;
+  color: $text-tertiary;
+}
+
+// ------------------------------------------------------------
+// Badges de status
+// ------------------------------------------------------------
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.status-badge--info { background: rgba(59, 130, 246, 0.12); color: #4ea1ff; }
+.status-badge--danger { background: rgba(255, 99, 118, 0.12); color: $danger; }
+.status-badge--success { background: rgba(52, 214, 122, 0.12); color: $green; }
+
+// ------------------------------------------------------------
+// Responsividade (a parte que trata do proprio .project-item
+// continua em dashboard.component.scss)
+// ------------------------------------------------------------
+@media (max-width: 1400px) {
+  .project-item__side { width: 180px; }
+}
+
+@media (max-width: 992px) {
+  .project-item__body { flex: 1 1 260px; }
+  .project-item__side { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; }
+  .project-item__progress { max-width: 260px; }
+}
+
+@media (max-width: 768px) {
+  .project-item__chevron { display: none; }
+  .project-item__progress { max-width: none; flex: 1; }
+}

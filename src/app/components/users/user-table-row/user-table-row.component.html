@@ -1,0 +1,75 @@
+<td class="users-table__col-check">
+  <input
+    type="checkbox"
+    class="table-check"
+    attr.aria-label="Selecionar {{ user.name }}" />
+</td>
+
+<td>
+  <div class="user-cell">
+    <span class="avatar avatar--{{ user.avatarModifier }}">
+      {{ user.initials }}
+    </span>
+
+    <span class="user-cell__name">
+      {{ user.name }}
+    </span>
+  </div>
+</td>
+
+<td class="cell-email">
+  {{ user.email }}
+</td>
+
+<td class="cell-role">
+  {{ user.roleLabel }}
+</td>
+
+<td>
+  <app-tier-badge
+    class="tier-badge tier-badge--{{ user.tierModifier }}"
+    [icon]="'fa-solid fa-medal'"
+    [label]="user.tierLabel">
+  </app-tier-badge>
+</td>
+
+<td>
+  <span class="status-pill status-pill--{{ user.statusModifier }}">
+    <span class="status-pill__dot" aria-hidden="true"></span>
+    {{ user.statusLabel }}
+  </span>
+</td>
+
+<td class="text-end">
+  <div class="row-actions">
+    <button
+      type="button"
+      mdbRipple
+      class="row-action"
+      (click)="edit.emit()"
+      title="Editar">
+
+      <i class="fa-solid fa-pen" aria-hidden="true"></i>
+      Editar
+    </button>
+
+<button
+  type="button"
+  mdbRipple
+  class="row-action"
+  [class.row-action--danger]="user.status === 'ATIVO'"
+  [class.row-action--success]="user.status === 'INATIVO'"
+  (click)="toggleStatus.emit()"
+  [attr.title]="user.status === 'ATIVO' ? 'Inativar' : 'Ativar'">
+
+  <i
+    class="fa-solid"
+    [class.fa-user-slash]="user.status === 'ATIVO'"
+    [class.fa-user-check]="user.status === 'INATIVO'"
+    aria-hidden="true">
+  </i>
+
+  {{ user.status === 'ATIVO' ? 'Inativar' : 'Ativar' }}
+</button>
+  </div>
+</td>

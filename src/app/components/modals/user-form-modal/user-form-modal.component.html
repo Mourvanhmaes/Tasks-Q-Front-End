@@ -1,0 +1,146 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ modoEdicao ? 'Editar usuário' : 'Novo usuário' }}
+  </h5>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn-close btn-close-white"
+    (click)="modalRef.close()"
+    aria-label="Fechar">
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="user-avatar-picker">
+    <span class="avatar avatar--lg">
+      {{ usuario?.initials || '?' }}
+    </span>
+  </div>
+
+  <mdb-form-control class="mb-3">
+    <input
+      mdbInput
+      type="text"
+      id="usuarioNome"
+      name="nome"
+      class="form-control"
+      [(ngModel)]="nome" />
+
+    <label mdbLabel class="form-label" for="usuarioNome">
+      Nome completo
+    </label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <input
+      mdbInput
+      type="email"
+      id="usuarioEmail"
+      name="email"
+      class="form-control"
+      [(ngModel)]="email" />
+
+    <label mdbLabel class="form-label" for="usuarioEmail">
+      E-mail
+    </label>
+  </mdb-form-control>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Cargo</label>
+
+      @if (cargos.length > 0 || modoEdicao) {
+        <select
+          class="form-select"
+          name="cargoId"
+          [(ngModel)]="cargoId">
+
+          <option [ngValue]="null" disabled>Selecione</option>
+
+          @for (cargo of cargos; track cargo.id) {
+            <option [ngValue]="cargo.id">
+              {{ cargo.nome }}
+            </option>
+          }
+
+          @if (!modoEdicao) {
+            <option [ngValue]="-1">Criar novo cargo</option>
+          }
+        </select>
+      }
+
+      @if (!modoEdicao && (cargos.length === 0 || cargoId === -1)) {
+        <input
+          type="text"
+          class="form-control"
+          name="nomeNovoCargo"
+          placeholder="Nome do novo cargo"
+          [(ngModel)]="nomeNovoCargo" />
+        <small class="text-muted">O cargo será criado antes do usuário.</small>
+      }
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Status</label>
+
+      <select
+        class="form-select"
+        name="status"
+        [(ngModel)]="status">
+
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  @if (!modoEdicao) {
+    <mdb-form-control class="mb-2">
+      <input
+        mdbInput
+        type="password"
+        id="usuarioSenha"
+        name="senha"
+        class="form-control"
+        minlength="8"
+        [(ngModel)]="senha" />
+
+      <label mdbLabel class="form-label" for="usuarioSenha">
+        Senha provisória
+      </label>
+    </mdb-form-control>
+  }
+
+  @if (erro) {
+    <div class="alert alert-danger mt-3">
+      {{ erro }}
+    </div>
+  }
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-secondary-ghost"
+    (click)="modalRef.close()">
+
+    Cancelar
+  </button>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-primary"
+    [disabled]="salvando"
+    (click)="salvar()">
+
+    {{ salvando
+      ? 'Salvando...'
+      : modoEdicao
+        ? 'Atualizar usuário'
+        : 'Salvar usuário' }}
+  </button>
+</div>

@@ -1,0 +1,69 @@
+@use '../../../styles/dashboard-tokens' as *;
+@use '../../../styles/panel-head';
+@use '../../../styles/progress-track';
+
+// Valores vindos de dashboard.component.scss. A regra do elemento raiz
+// (.panel) continua na pagina, porque bate no host.
+.select-pill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid $card-border-inner;
+  background: $card-bg-inner;
+  font-size: 0.78rem;
+  color: $text-secondary;
+
+  i { font-size: 0.66rem; color: $text-tertiary; }
+}
+
+.summary-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary-item {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto minmax(64px, 96px) 34px;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-item__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.summary-item__dot--success { background: $green; }
+.summary-item__dot--blue { background: $blue-strong; }
+.summary-item__dot--danger { background: $danger; }
+
+.summary-item__label {
+  font-size: 0.85rem;
+  color: $text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary-item__count {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.summary-item__pct {
+  font-size: 0.76rem;
+  color: $text-tertiary;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .summary-item { grid-template-columns: 8px minmax(0, 1fr) auto minmax(56px, 1fr) 34px; }
+}

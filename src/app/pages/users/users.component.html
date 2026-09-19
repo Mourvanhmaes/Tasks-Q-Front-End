@@ -1,1 +1,205 @@
-<p>users works!</p>
+<app-shell>
+  <div class="page">
+    <header class="page-header">
+      <div class="page-header__text">
+        <h1 class="page-header__title">Gerenciamento de Usuários</h1>
+        <p class="page-header__subtitle">
+          Crie, edite e gerencie os acessos da sua equipe.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        mdbRipple
+        class="btn btn-new-user"
+        (click)="openUserModal()">
+
+        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        Novo Usuário
+      </button>
+    </header>
+
+    <div class="page-toolbar">
+      <mdb-form-control class="toolbar-search">
+        <i
+          class="fa-solid fa-magnifying-glass toolbar-search__icon"
+          aria-hidden="true">
+        </i>
+
+        <input
+          mdbInput
+          type="text"
+          id="buscaUsuario"
+          name="busca"
+          class="form-control"
+          placeholder="Buscar por nome ou e-mail..."
+          [(ngModel)]="busca"
+          (ngModelChange)="aplicarFiltros()" />
+      </mdb-form-control>
+
+      <div class="toolbar-select">
+        <i
+          class="fa-regular fa-user toolbar-select__icon"
+          aria-hidden="true">
+        </i>
+
+        <select
+          class="form-select"
+          name="cargoFiltro"
+          aria-label="Filtrar por cargo"
+          [(ngModel)]="cargoSelecionado"
+          (ngModelChange)="aplicarFiltros()">
+
+          <option value="">Todos os cargos</option>
+
+          @for (cargo of cargosDisponiveis; track cargo) {
+            <option [value]="cargo">{{ cargo }}</option>
+          }
+        </select>
+
+        <i
+          class="fa-solid fa-chevron-down toolbar-select__chevron"
+          aria-hidden="true">
+        </i>
+      </div>
+
+      <div class="toolbar-select">
+        <i
+          class="fa-solid fa-circle-half-stroke toolbar-select__icon"
+          aria-hidden="true">
+        </i>
+
+        <select
+          class="form-select"
+          name="statusFiltro"
+          aria-label="Filtrar por status"
+          [(ngModel)]="statusSelecionado"
+          (ngModelChange)="aplicarFiltros()">
+
+          <option value="">Todos os status</option>
+          <option value="Ativo">Ativo</option>
+          <option value="Inativo">Inativo</option>
+        </select>
+
+        <i
+          class="fa-solid fa-chevron-down toolbar-select__chevron"
+          aria-hidden="true">
+        </i>
+      </div>
+
+       
+<button
+  type="button"
+  mdbRipple
+  class="toolbar-btn"
+  [disabled]="!temFiltrosAtivos"
+  (click)="limparFiltros()">
+
+  <i class="fa-solid fa-filter-circle-xmark" aria-hidden="true"></i>
+  Limpar filtros
+</button>
+    </div>
+
+    <section class="table-card">
+      <div class="table-responsive">
+        <table class="table users-table align-middle mb-0">
+          <thead>
+            <tr>
+              <th class="users-table__col-check">
+                <input
+                  type="checkbox"
+                  class="table-check"
+                  aria-label="Selecionar todos os usuários" />
+              </th>
+
+              <th class="users-table__col-user">Usuário</th>
+              <th class="users-table__col-email">Email</th>
+              <th class="users-table__col-role">Cargo</th>
+              <th class="users-table__col-rank">Rank</th>
+              <th class="users-table__col-status">Status</th>
+              <th class="users-table__col-actions text-end">Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (user of users; track user.email) {
+              <tr
+                app-user-table-row
+                [user]="user"
+                (edit)="openUserModal(user)"
+                (toggleStatus)="openStatusModal(user)">
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <div class="table-footer__left">
+          <span class="table-footer__label">Itens por página</span>
+
+          <select
+            class="form-select table-footer__size"
+            aria-label="Itens por página">
+
+            <option selected>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+
+          <span class="table-footer__range">
+            {{ users.length === 0
+              ? '0 de 0 usuários'
+              : '1–' + users.length + ' de ' + users.length + ' usuários' }}
+          </span>
+        </div>
+
+        <nav class="pagination-nav" aria-label="Paginação">
+          <button
+            type="button"
+            class="page-btn"
+            aria-label="Primeira página"
+            disabled>
+
+            <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+          </button>
+
+          <button
+            type="button"
+            class="page-btn"
+            aria-label="Página anterior"
+            disabled>
+
+            <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+          </button>
+
+          <button
+            type="button"
+            class="page-btn page-btn--active"
+            aria-current="page">
+
+            1
+          </button>
+
+          <button
+            type="button"
+            class="page-btn"
+            aria-label="Próxima página"
+            disabled>
+
+            <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+          </button>
+
+          <button
+            type="button"
+            class="page-btn"
+            aria-label="Última página"
+            disabled>
+
+            <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+          </button>
+        </nav>
+      </div>
+    </section>
+  </div>
+</app-shell>

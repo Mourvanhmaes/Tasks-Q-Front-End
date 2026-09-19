@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ project ? 'Editar projeto' : 'Novo Projeto' }}</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="projetoNome" name="name" class="form-control" [(ngModel)]="name" />
+    <label mdbLabel class="form-label" for="projetoNome">Titulo do projeto</label>
+  </mdb-form-control>
+  <mdb-form-control class="mb-3">
+    <textarea mdbInput id="projetoDescricao" name="description" class="form-control" rows="3" [(ngModel)]="description"></textarea>
+    <label mdbLabel class="form-label" for="projetoDescricao">Descricao</label>
+  </mdb-form-control>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Responsavel</label>
+      <select class="form-select" name="ownerId" [(ngModel)]="ownerId">
+        @for (user of users; track user.id) { <option [ngValue]="user.id">{{ user.nome }}</option> }
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prazo</label>
+      <input type="date" class="form-control" name="deadLine" [(ngModel)]="deadLine" />
+    </div>
+  </div>
+
+  <label class="form-label-select">Membros</label>
+  <mdb-form-control class="mb-2">
+    <input mdbInput type="text" id="projetoBuscaMembro" class="form-control" list="projetoMembrosSugestoes" autocomplete="off" />
+    <label mdbLabel class="form-label" for="projetoBuscaMembro">Buscar membro pelo nome</label>
+  </mdb-form-control>
+  <datalist id="projetoMembrosSugestoes">
+    <option value="Mariana Ferreira"></option>
+    <option value="Rafael Andrade"></option>
+    <option value="Julia Santos"></option>
+    <option value="Thiago Pereira"></option>
+    <option value="Gustavo Cardoso"></option>
+  </datalist>
+
+  <select class="form-select" multiple size="4">
+    <option selected>Mariana Ferreira</option>
+    <option>Rafael Andrade</option>
+    <option>Julia Santos</option>
+    <option>Thiago Pereira</option>
+    <option>Gustavo Cardoso</option>
+  </select>
+  <p class="form-hint">Digite acima para ver sugestoes de nomes e depois marque o(s) membro(s) na lista. Segure Ctrl (ou Cmd no Mac) para selecionar mais de um.</p>
+
+  <div class="project-form__danger-zone">
+    <div>
+      <span class="project-form__danger-zone-title">Excluir projeto definitivamente</span>
+      <span class="project-form__danger-zone-hint">Disponivel somente depois que o projeto for arquivado.</span>
+    </div>
+    <button type="button" mdbRipple class="btn btn-danger btn-sm" [disabled]="!project" (click)="openDeleteConfirm()">
+      <i class="fa-solid fa-trash me-2"></i>Excluir
+    </button>
+  </div>
+</div>
+<div class="modal-footer justify-content-between">
+  <button type="button" mdbRipple class="btn btn-outline-warning" (click)="openArchiveConfirm()">
+    <i class="fa-solid fa-box-archive me-2"></i>Arquivar projeto
+  </button>
+  <div class="d-flex gap-2">
+    <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+    <button type="button" mdbRipple class="btn btn-primary" [disabled]="saving" (click)="save()">{{ saving ? 'Salvando...' : 'Salvar projeto' }}</button>
+  </div>
+</div>

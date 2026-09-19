@@ -3,6 +3,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { XpComponent } from './pages/xp/xp.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +27,17 @@ export const routes: Routes = [
   {
     path: 'tasks',
     component: TasksComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent
+  },
+  {
+    path: 'xp',
+    component: XpComponent
+  },
+  {
+    path: 'projects',
+    component: ProjectsComponent
   }
 ];

@@ -1,1 +1,55 @@
-<p>login works!</p>
+<div class="login-page">
+  <div class="login-panel login-panel--brand">
+    <div class="brand-mark">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+    <h1 class="brand-title">Tasks<span>Q</span></h1>
+    <p class="brand-tagline">Organize tarefas, conclua projetos e evolua com sua equipe.</p>
+
+    <ul class="brand-highlights">
+      <li><i class="fa-solid fa-diagram-project"></i> Quadros kanban por projeto</li>
+      <li><i class="fa-solid fa-bolt"></i> Ganhe XP a cada tarefa concluida</li>
+      <li><i class="fa-solid fa-ranking-star"></i> Ranking geral da empresa</li>
+    </ul>
+  </div>
+
+  <div class="login-panel login-panel--form">
+    <div class="login-card">
+      <h2 class="login-card__title">Bem-vindo de volta</h2>
+      <p class="login-card__subtitle">Entre com suas credenciais para acessar o Tasks-Q.</p>
+
+      <form class="login-form" (ngSubmit)="entrar()">
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="loginEmail" name="email" class="form-control form-control-lg" [(ngModel)]="email" />
+          <label mdbLabel class="form-label" for="loginEmail">E-mail corporativo</label>
+        </mdb-form-control>
+
+        <mdb-form-control class="mb-3">
+          <input mdbInput type="password" id="loginSenha" name="senha" class="form-control form-control-lg" [(ngModel)]="senha" />
+          <label mdbLabel class="form-label" for="loginSenha">Senha</label>
+        </mdb-form-control>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="lembrarMe" />
+            <label class="form-check-label" for="lembrarMe">Lembrar-me</label>
+          </div>
+          <a href="#" class="login-form__forgot">Esqueceu a senha?</a>
+        </div>
+
+        @if (erro) {
+          <div class="alert alert-danger mb-3">{{ erro }}</div>
+        }
+
+        <button type="submit" mdbRipple class="btn btn-primary btn-lg w-100 login-form__submit">
+          Entrar
+          <i class="fa-solid fa-arrow-right-long ms-2"></i>
+        </button>
+      </form>
+
+      <p class="login-card__footer">
+        Nao tem uma conta? <a href="#">Fale com o administrador</a>
+      </p>
+    </div>
+  </div>
+</div>

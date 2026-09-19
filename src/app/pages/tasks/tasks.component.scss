@@ -1,0 +1,122 @@
+.page {
+  padding: var(--space-6) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Regra do raiz do componente app-page-header (bate no host)
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+// Regra do raiz do componente app-page-toolbar (bate no host)
+.page-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.page-toolbar__search { flex: 1 1 260px; max-width: 360px; }
+.page-toolbar__select {
+  max-width: 190px;
+  background: var(--color-surface-1);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+.page-toolbar__session {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+.page-toolbar__session-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin: 0;
+  white-space: nowrap;
+}
+.page-toolbar__session .page-toolbar__select { max-width: 260px; }
+
+// ----- quadro kanban -----
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex: 1;
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+}
+
+// Regra do raiz do componente app-board-column (bate no host)
+.board-column {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  min-width: 270px;
+  flex: 1 1 270px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+// ----- cards (raiz do componente app-task-card) -----
+.card {
+  position: relative;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+.card:hover { border-color: var(--color-border); transform: translateY(-1px); }
+.card { cursor: pointer; }
+
+.card--dragging { opacity: 0.5; }
+
+.card--concluded {
+  border-color: var(--color-success);
+  background: linear-gradient(0deg, var(--color-success-bg) 0%, var(--color-surface-2) 60%);
+}
+
+// Override da classe global .avatar usada dentro do app-task-card.
+// Fica aqui (e nao no .scss do componente) porque .avatar e global.
+:host ::ng-deep .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-surface-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  background: var(--color-surface-3);
+  color: var(--color-text-primary);
+  flex: none;
+}
+
+@media (max-width: 1100px) {
+  .board-column { min-width: 240px; }
+}
+
+@media (max-width: 720px) {
+  .page { padding: var(--space-5) var(--space-4); }
+  .page-header { flex-direction: column; align-items: stretch; }
+  .page-toolbar { flex-wrap: wrap; }
+  .board { flex-direction: column; }
+  .board-column { max-height: none; min-width: 0; }
+}

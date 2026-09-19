@@ -1,0 +1,24 @@
+<app-shell>
+<div class="page">
+
+  <app-page-header
+    class="page-header"
+    [title]="'Gerenciamento de Projetos'"
+    [subtitle]="'Crie projetos, adicione tarefas e monte a equipe responsavel.'">
+    <button type="button" mdbRipple class="btn btn-primary" (click)="openProjectModal()">
+      <i class="fa-solid fa-plus me-2"></i>Novo Projeto
+    </button>
+  </app-page-header>
+
+  <div class="project-grid">
+    @for (project of projects; track project.id) {
+      <app-project-card
+        class="project-card"
+        [project]="project"
+        (edit)="openProjectModal($event)"
+        (team)="openAssignUsersModal()"></app-project-card>
+    }
+    
+  </div>
+</div>
+</app-shell>

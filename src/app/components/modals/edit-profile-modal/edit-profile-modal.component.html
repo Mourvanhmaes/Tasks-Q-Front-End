@@ -1,0 +1,83 @@
+<div class="modal-header">
+  <h5 class="modal-title">Editar dados pessoais</h5>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn-close btn-close-white"
+    (click)="modalRef.close()"
+    aria-label="Fechar">
+  </button>
+</div>
+
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input
+      mdbInput
+      type="text"
+      id="perfilNome"
+      name="nome"
+      class="form-control"
+      [(ngModel)]="nome"
+    />
+
+    <label mdbLabel class="form-label" for="perfilNome">
+      Nome completo
+    </label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <input
+      mdbInput
+      type="email"
+      id="perfilEmail"
+      name="email"
+      class="form-control"
+      [(ngModel)]="email"
+    />
+
+    <label mdbLabel class="form-label" for="perfilEmail">
+      E-mail
+    </label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <input
+      mdbInput
+      type="password"
+      id="perfilSenha"
+      name="senha"
+      class="form-control"
+      [(ngModel)]="senha"
+    />
+
+    <label mdbLabel class="form-label" for="perfilSenha">
+      Nova senha (opcional)
+    </label>
+  </mdb-form-control>
+
+  @if (erro) {
+    <div class="alert alert-danger">
+      {{ erro }}
+    </div>
+  }
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-secondary-ghost"
+    (click)="modalRef.close()">
+    Cancelar
+  </button>
+
+  <button
+    type="button"
+    mdbRipple
+    class="btn btn-primary"
+    [disabled]="salvando"
+    (click)="salvar()">
+    {{ salvando ? 'Salvando...' : 'Salvar alterações' }}
+  </button>
+</div>

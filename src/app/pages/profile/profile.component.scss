@@ -1,0 +1,111 @@
+.page { padding: 0 0 var(--space-7); }
+
+// Raiz do componente app-profile-banner (bate no host).
+// O display: block repoe o comportamento da <div> original, ja que o host
+// e um elemento customizado (inline por padrao).
+.profile-banner { display: block; position: relative; margin-bottom: var(--space-6); }
+
+// .avatar e classe global (styles.scss); o avatar agora fica dentro do
+// app-profile-banner, por isso o override vem por ::ng-deep.
+:host ::ng-deep .avatar {
+  border-radius: var(--radius-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--color-dark);
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  border: 4px solid var(--color-bg);
+}
+:host ::ng-deep .avatar--xl { width: 108px; height: 108px; font-size: 2rem; }
+
+// .tier-badge aparece no banner (dentro do componente) e em "Conquistas"
+// (direto nesta pagina); o ::ng-deep cobre os dois casos com uma regra so.
+:host ::ng-deep .tier-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px var(--space-3); border-radius: var(--radius-full);
+  font-size: 0.72rem; font-weight: 700; color: var(--color-dark);
+}
+:host ::ng-deep .tier-badge--bronze { background: var(--tier-bronze); }
+:host ::ng-deep .tier-badge--silver { background: var(--tier-silver); }
+:host ::ng-deep .tier-badge--gold { background: var(--tier-gold); }
+:host ::ng-deep .tier-badge--platinum { background: var(--tier-platinum); }
+:host ::ng-deep .tier-badge--diamond { background: var(--tier-diamond); }
+:host ::ng-deep .tier-badge--locked { background: var(--color-surface-3); color: var(--color-text-muted); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  padding: 0 var(--space-7);
+  margin-bottom: var(--space-5);
+}
+.stat-card {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.stat-card__icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  flex: none;
+}
+.stat-card__icon--primary { background: var(--color-primary-900); color: var(--color-primary-300); }
+.stat-card__icon--xp { background: rgba(255, 209, 102, 0.12); color: var(--xp-glow); }
+.stat-card__icon--success { background: var(--color-success-bg); color: var(--color-success); }
+.stat-card__icon--streak { background: rgba(255, 122, 80, 0.12); color: var(--color-accent-orange); }
+.stat-card__value { display: block; font-size: 1.15rem; font-weight: 700; color: var(--color-text-primary); }
+.stat-card__label { display: block; font-size: 0.76rem; color: var(--color-text-muted); }
+
+// Raiz do componente app-xp-progress-bar (bate no host)
+.xp-progress-card {
+  display: block;
+  margin: 0 var(--space-7) var(--space-6);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+}
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  padding: 0 var(--space-7);
+}
+
+.panel {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.panel__title { font-size: 1.05rem; font-weight: 700; color: var(--color-text-primary); margin: 0 0 var(--space-4); }
+.panel__title--spaced { margin-top: var(--space-6); }
+
+.achievements { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-2); }
+
+// Raiz do componente app-activity-list (bate no host); os <li> estao em
+// activity-list.component.scss
+.activity-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+
+// ----- modal -----
+.app-modal { background: var(--color-surface-1); color: var(--color-text-primary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.app-modal .modal-header, .app-modal .modal-footer { border-color: var(--color-border-subtle); }
+.app-modal .form-control { background: var(--color-surface-2); color: var(--color-text-primary); border-color: var(--color-border); }
+.app-modal .form-label { color: var(--color-text-secondary); }
+.btn-secondary-ghost { background: transparent; color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+.btn-secondary-ghost:hover { background: var(--color-surface-2); color: var(--color-text-primary); }
+
+@media (max-width: 900px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); padding-inline: var(--space-5); }
+  .profile-columns { grid-template-columns: 1fr; padding-inline: var(--space-5); }
+  .xp-progress-card { margin-inline: var(--space-5); }
+}
+
+.profile-columns--single {
+  grid-template-columns: 1fr;
+}

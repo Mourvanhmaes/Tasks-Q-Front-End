@@ -1,0 +1,38 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+<svg class="holidays-card__decor" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 108 C60 74, 108 96, 168 62 C220 32, 268 56, 320 30 L320 120 L0 120 Z" />
+  <path class="holidays-card__decor-back" d="M0 118 C54 96, 112 112, 176 86 C232 64, 274 82, 320 62 L320 120 L0 120 Z" />
+</svg>
+
+<div class="card-head">
+  <h2 class="card-head__title">
+    <i class="fa-regular fa-calendar-days card-head__title-icon card-head__title-icon--purple" aria-hidden="true"></i>
+    Próximos feriados
+  </h2>
+  <button type="button" class="card-head__menu" aria-label="Opções do card" (click)="menu.emit()">
+    <i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+  </button>
+</div>
+
+<div class="holidays-card__main">
+  <span class="holidays-card__icon">
+    <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+  </span>
+  <span class="holidays-card__date">{{ next.date }}</span>
+  <div class="holidays-card__info">
+    <span class="holidays-card__name">{{ next.name }}</span>
+    <span class="holidays-card__caption">{{ next.caption }}</span>
+  </div>
+</div>
+
+<ul class="holidays-card__list">
+  @for (holiday of holidays; track holiday.name) {
+    <li class="holiday-item">
+      <span class="holiday-item__dot holiday-item__dot--{{ holiday.dotModifier }}" aria-hidden="true"></span>
+      <span class="holiday-item__text">
+        <span class="holiday-item__date">{{ holiday.date }}</span>
+        <span class="holiday-item__name">{{ holiday.name }}</span>
+      </span>
+    </li>
+  }
+</ul>

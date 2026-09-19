@@ -1,3 +1,250 @@
 /* You can add global styles to this file, and also import other style files */
+
+// ============================================================
+// Tasks-Q — tema global (Sass) aplicado antes da compilacao do MDB
+// Sobrescreve as variaveis padrao do Bootstrap/MDB com a paleta da marca
+// ============================================================
+$primary:        #b78bff;
+$secondary:      #2f3444;
+$success:        #4ade80;
+$warning:        #fbbf24;
+$danger:         #f87171;
+$info:           #60a5fa;
+$light:          #383d50;
+$dark:           #1e212d;
+
+$body-bg:        #1e212d;
+$body-color:     #ffffff;
+
+$border-radius:      0.75rem;
+$border-radius-sm:   0.5rem;
+$border-radius-lg:   1.25rem;
+
+$font-family-sans-serif: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+// ============================================================
+// Design tokens — Kanban XP
+// Variaveis CSS livres para uso em qualquer *.component.scss do projeto
+// ============================================================
+:root {
+  color-scheme: dark;
+
+  // marca
+  --color-white: #ffffff;
+  --color-dark: #1e212d;
+  --color-primary: #b78bff;
+  --color-primary-100: #f3ecff;
+  --color-primary-200: #e9ddff;
+  --color-primary-300: #dcc9ff;
+  --color-primary-400: #cbb0ff;
+  --color-primary-500: #b78bff;
+  --color-primary-600: #9a66f0;
+  --color-primary-700: #7c47d6;
+  --color-primary-800: #5f30ad;
+  --color-primary-900: #452080;
+
+  // superficies (tema escuro)
+  --color-bg: #1e212d;
+  --color-surface-1: #262a38;
+  --color-surface-2: #2f3444;
+  --color-surface-3: #383d50;
+  --color-border: #3a3f52;
+  --color-border-subtle: #2a2e3d;
+
+  // texto
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a4b8;
+  --color-text-muted: #6b7086;
+  --color-text-disabled: #4a4e63;
+
+  // semanticas
+  --color-success: #4ade80;
+  --color-success-bg: #1c3327;
+  --color-warning: #fbbf24;
+  --color-warning-bg: #3a2e14;
+  --color-danger: #f87171;
+  --color-danger-bg: #3a1f1f;
+  --color-info: #60a5fa;
+  --color-info-bg: #1b2a3e;
+  --color-accent-orange: #ff7a50;
+  --color-accent-lime: #d9f76a;
+
+  // gamificacao
+  --xp-bar-start: var(--color-primary);
+  --xp-bar-end: var(--color-accent-lime);
+  --xp-bar-bg: var(--color-surface-2);
+  --xp-glow: #ffd166;
+  --xp-streak: var(--color-accent-orange);
+
+  --tier-bronze: #cd7f32;
+  --tier-silver: #c0c0c0;
+  --tier-gold: #ffd700;
+  --tier-platinum: #b9f2ff;
+  --tier-diamond: #c9a6ff;
+
+  // colunas do kanban
+  --col-todo: var(--color-text-secondary);
+  --col-doing: var(--color-info);
+  --col-done: var(--color-success);
+  --col-blocked: var(--color-danger);
+
+  // espacamento
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  // bordas e sombras
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-glow-primary: 0 0 24px rgba(183, 139, 255, 0.45);
+  --shadow-glow-xp: 0 0 20px rgba(255, 209, 102, 0.5);
+
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+}
+
+body {
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+}
+
+// scrollbar discreto no tema escuro
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-surface-3); border-radius: var(--radius-full); }
+
+// ============================================================
+// Layout compartilhado — sidebar + conteudo da pagina
+// ============================================================
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+.app-shell__content {
+  flex: 1;
+  min-width: 0;
+}
+
+// ============================================================
+// MDB Angular — tema global dos modais (MdbModalService renderiza
+// .modal/.modal-dialog/.modal-content fora do component, entao o
+// tema deles precisa ser global) + formularios e chips reutilizados
+// dentro dos modais
+// ============================================================
+.modal-content {
+  background: var(--color-surface-1);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.modal-header, .modal-footer { border-color: var(--color-border-subtle); }
+.modal-title { color: var(--color-text-primary); }
+
+.form-control, .form-select {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+.form-control:focus, .form-select:focus {
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+select[multiple] option,
+select[size] option,
+.form-select option,
+.form-select optgroup {
+  padding: 6px 10px;
+  background-color: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+select[multiple] option:checked,
+select[size] option:checked,
+.form-select option:checked {
+  background: var(--color-primary) linear-gradient(0deg, var(--color-primary) 0%, var(--color-primary) 100%);
+  color: var(--color-dark);
+}
+.form-select optgroup {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+.form-label, .form-label-select { color: var(--color-text-secondary); }
+.form-hint { font-size: 0.76rem; color: var(--color-text-muted); margin: 0; }
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.btn-icon:hover { background: var(--color-surface-3); color: var(--color-text-primary); }
+.btn-icon--danger:hover { background: var(--color-danger-bg); color: var(--color-danger); }
+.btn-icon:focus { outline: none; box-shadow: none; }
+.btn-icon:focus-visible { outline: 2px solid var(--color-border); outline-offset: 2px; }
+
+.btn-secondary-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary-ghost:hover { background: var(--color-surface-2); color: var(--color-text-primary); }
+
+.avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  width: 34px; height: 34px; font-size: 0.72rem;
+}
+.avatar--sm { width: 24px; height: 24px; font-size: 0.6rem; margin-right: var(--space-2); }
+.avatar--lg { width: 72px; height: 72px; font-size: 1.4rem; }
+
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px var(--space-2); border-radius: var(--radius-sm); font-size: 0.72rem; font-weight: 600; }
+.badge--success { background: var(--color-success-bg); color: var(--color-success); }
+.badge--warning { background: var(--color-warning-bg); color: var(--color-warning); }
+.badge--danger { background: var(--color-danger-bg); color: var(--color-danger); }
+.badge--info { background: var(--color-info-bg); color: var(--color-info); }
+.badge--neutral { background: var(--color-surface-3); color: var(--color-text-secondary); }
+.badge--priority-baixa { background: var(--color-info-bg); color: var(--color-info); }
+.badge--priority-media { background: var(--color-warning-bg); color: var(--color-warning); }
+.badge--priority-alta { background: var(--color-danger-bg); color: var(--color-danger); }
+.badge--priority-urgente { background: var(--color-danger-bg); color: #fff; border: 1px solid var(--color-danger); }
+
+.user-avatar-picker { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+
+.assign-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); max-height: 260px; overflow-y: auto; }
+.assign-list__item { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-2); }
+.assign-list__item label { display: flex; flex-direction: column; cursor: pointer; }
+.assign-list__name { font-size: 0.86rem; font-weight: 600; color: var(--color-text-primary); }
+.assign-list__role { font-size: 0.74rem; color: var(--color-text-muted); }
+
+.app-modal__confirm { text-align: center; padding-top: var(--space-5); color: var(--color-text-primary); }
+.app-modal__confirm-icon {
+  width: 56px; height: 56px; border-radius: var(--radius-full);
+  background: var(--color-danger-bg); color: var(--color-danger);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin: 0 auto var(--space-4);
+}
+.app-modal__confirm p { color: var(--color-text-secondary); font-size: 0.88rem; }

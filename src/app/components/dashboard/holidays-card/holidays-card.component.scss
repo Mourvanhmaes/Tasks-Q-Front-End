@@ -1,0 +1,122 @@
+@use '../../../styles/dashboard-tokens' as *;
+@use '../../../styles/card-head';
+
+// Valores vindos de dashboard.component.scss. As regras do elemento raiz
+// (.stat-card, .holidays-card) continuam na pagina, porque batem no host.
+.holidays-card__decor {
+  position: absolute;
+  right: 0;
+  bottom: 62px;
+  width: 58%;
+  height: 78px;
+  pointer-events: none;
+
+  path { fill: rgba(169, 112, 255, 0.06); }
+  .holidays-card__decor-back { fill: rgba(77, 143, 255, 0.05); }
+}
+
+.holidays-card__main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.holidays-card__icon {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  background: rgba(124, 58, 237, 0.18);
+  color: $purple-light;
+}
+
+.holidays-card__date {
+  flex: none;
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.holidays-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.holidays-card__name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.holidays-card__caption {
+  font-size: 0.78rem;
+  color: #8f9ab2;
+}
+
+.holidays-card__list {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid $card-border-inner;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: auto;
+}
+
+.holiday-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-left: 14px;
+  min-width: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+
+  &:first-child { padding-left: 0; border-left: none; }
+}
+
+.holiday-item__dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.holiday-item__dot--purple { background: $purple-light; }
+.holiday-item__dot--blue { background: $blue-strong; }
+.holiday-item__dot--success { background: $green; }
+
+.holiday-item__text { display: flex; flex-direction: column; min-width: 0; }
+.holiday-item__date {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: $text-primary;
+  white-space: nowrap;
+}
+.holiday-item__name {
+  font-size: 0.75rem;
+  color: $text-tertiary;
+  line-height: 1.35;
+}
+
+@media (max-width: 992px) {
+  .holiday-item { padding-left: 10px; }
+}
+
+@media (max-width: 768px) {
+  .holidays-card__decor { display: none; }
+  .holidays-card__main { flex-wrap: wrap; gap: 12px; }
+  .holidays-card__date { font-size: 1.9rem; }
+
+  .holidays-card__list { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .holiday-item { padding-left: 0; border-left: none; }
+}

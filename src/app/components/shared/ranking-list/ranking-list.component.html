@@ -1,0 +1,35 @@
+<!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+@if (variant === 'xp') {
+  @for (entry of entries; track entry.name) {
+    <li class="ranking-row" [class.ranking-row--top]="entry.top" [class.ranking-row--me]="entry.me">
+      <span class="ranking-row__position">@if (entry.top) {<i class="fa-solid fa-crown"></i>}{{ positionLabel(entry) }}</span>
+      <span class="avatar avatar--sm">{{ entry.initials }}</span>
+      <span class="ranking-row__name">{{ entry.name }} @if (entry.me) {<span class="ranking-row__you">voce</span>}</span>
+      <span class="ranking-row__role">{{ entry.role }}</span>
+      <app-tier-badge
+        class="tier-badge tier-badge--{{ entry.tierModifier }}"
+        [icon]="'fa-solid fa-award'"
+        [label]="entry.tierLabel ?? ''"></app-tier-badge>
+      <span class="ranking-row__xp">{{ entry.xpLabel }}</span>
+    </li>
+  }
+} @else {
+  @for (entry of entries; track entry.name) {
+    <li class="ranking-item">
+      <span
+        class="ranking-item__position"
+        [class.ranking-item__position--gold]="entry.positionModifier === 'gold'"
+        [class.ranking-item__position--silver]="entry.positionModifier === 'silver'"
+        [class.ranking-item__position--bronze]="entry.positionModifier === 'bronze'">{{ entry.position }}</span>
+      <span class="member-avatar">{{ entry.initials }}</span>
+      <span class="ranking-item__info">
+        <span class="ranking-item__name">{{ entry.name }}</span>
+        <span class="ranking-item__role">{{ entry.role }}</span>
+      </span>
+      <span class="ranking-item__score">
+        <span class="ranking-item__score-value">{{ entry.scoreValue }}</span>
+        <span class="ranking-item__score-label">{{ entry.scoreLabel }}</span>
+      </span>
+    </li>
+  }
+}

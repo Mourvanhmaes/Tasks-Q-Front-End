@@ -1,0 +1,78 @@
+<app-shell>
+<div class="page">
+
+  <div class="xp-hero">
+
+    <!-- MOCK INICIO: textos de apresentacao — remover quando vierem do back-end -->
+    <div class="xp-hero__top">
+      <div class="xp-hero__intro">
+        <h1 class="xp-hero__title">Sua <span class="xp-hero__title-accent">evolucao</span></h1>
+        <p class="xp-hero__subtitle">Conquiste, evolua, va mais longe.</p>
+        <p class="xp-hero__caption">Complete tarefas, acumule XP e evolua de tier na sua jornada com a TasksQ.</p>
+      </div>
+      <div class="xp-hero__quote">
+        <p>&ldquo;Disciplina hoje, resultados extraordinarios amanha.&rdquo;</p>
+      </div>
+    </div>
+    <!-- MOCK FIM -->
+
+    <!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+    <div class="row align-items-center g-4 xp-hero__body">
+
+      <div class="col-12 col-xl-3 xp-hero__side order-2 order-xl-1">
+        @for (metric of leftMetrics; track metric.title) {
+          <app-xp-metric-card class="xp-metric-card" [data]="metric"></app-xp-metric-card>
+        }
+      </div>
+
+      <div class="col-12 col-xl-6 xp-hero__center order-1 order-xl-2">
+        <app-xp-progress-ring
+          class="xp-progress-ring"
+          [icon]="'fa-solid fa-gem'"
+          [tierLabel]="'Tier Ouro'"></app-xp-progress-ring>
+
+        <!-- MOCK INICIO: progresso fixo — remover quando o XP vier do service -->
+        <div class="xp-progress-summary">
+          <span class="xp-progress-summary__value">2.140 <span class="xp-progress-summary__sep">/</span> 3.000 XP</span>
+          <span class="xp-progress-summary__hint">Faltam 860 XP para o Tier Platina</span>
+        </div>
+        <!-- MOCK FIM -->
+      </div>
+
+      <div class="col-12 col-xl-3 xp-hero__side order-3 order-xl-3">
+        @for (metric of rightMetrics; track metric.title) {
+          <app-xp-metric-card class="xp-metric-card" [data]="metric"></app-xp-metric-card>
+        }
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ranking-card">
+    <div class="ranking-card__header">
+      <div>
+        <h2 class="ranking-card__title"><i class="fa-solid fa-trophy ranking-card__title-icon"></i>Ranking da Cabanos</h2>
+        <p class="ranking-card__subtitle">Os membros que mais se destacam este mes.</p>
+      </div>
+      <!-- MOCK INICIO: filtro de periodo — remover quando o ranking vier da API -->
+      <select class="form-select ranking-card__select" aria-label="Periodo do ranking">
+        <option selected>Este mes</option>
+        <option>Essa semana</option>
+        <option>Geral</option>
+      </select>
+      <!-- MOCK FIM -->
+    </div>
+
+    <div class="ranking-list__header">
+      <span class="ranking-list__header-position">#</span>
+      <span class="ranking-list__header-avatar"></span>
+      <span class="ranking-list__header-user">Usuario</span>
+      <span class="ranking-list__header-role">Cargo</span>
+      <span class="ranking-list__header-badge"></span>
+      <span class="ranking-list__header-xp">XP</span>
+    </div>
+
+    <ol class="ranking-list" app-ranking-list [variant]="'xp'" [entries]="ranking"></ol>
+  </div>
+</div>
+</app-shell>

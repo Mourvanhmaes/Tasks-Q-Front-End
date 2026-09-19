@@ -1,0 +1,72 @@
+<app-shell>
+  <div class="page">
+
+    @if (erro) {
+      <div class="alert alert-danger">
+        {{ erro }}
+      </div>
+    }
+
+    @if (usuario) {
+      <app-profile-banner
+        class="profile-banner"
+        [initials]="iniciais"
+        [name]="usuario.nome"
+        [role]="usuario.cargo.nome"
+        [tierLabel]="eloLabel"
+        [tierModifier]="tierModifier"
+        (edit)="openEditProfileModal()">
+      </app-profile-banner>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--xp">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">{{ usuario.xp }} XP</span>
+            <span class="stat-card__label">XP total</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--success">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">
+              {{ usuario.status === 'ATIVO' ? 'Ativo' : 'Inativo' }}
+            </span>
+            <span class="stat-card__label">Status</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card__icon stat-card__icon--streak">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+
+          <div>
+            <span class="stat-card__value">{{ eloLabel }}</span>
+            <span class="stat-card__label">Elo atual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-columns profile-columns--single">
+        <div class="panel">
+          <h2 class="panel__title">Dados pessoais</h2>
+
+          <dl
+            class="info-list"
+            app-info-list
+            [items]="personalInfo">
+          </dl>
+        </div>
+      </div>
+    }
+
+  </div>
+</app-shell>

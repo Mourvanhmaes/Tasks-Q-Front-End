@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ task ? 'Editar tarefa' : 'Nova Tarefa' }}</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="tarefaTitulo" name="title" class="form-control" [(ngModel)]="title" />
+    <label mdbLabel class="form-label" for="tarefaTitulo">Titulo da tarefa</label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-3">
+    <textarea mdbInput id="tarefaDescricao" name="description" class="form-control" rows="3" [(ngModel)]="description"></textarea>
+    <label mdbLabel class="form-label" for="tarefaDescricao">Descricao</label>
+  </mdb-form-control>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Projeto</label>
+      <select class="form-select" name="projectId" [(ngModel)]="projectId">
+        @for (project of projects; track project.id) { <option [ngValue]="project.id">{{ project.name }}</option> }
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Responsavel</label>
+      <select class="form-select" name="assigneeId" [(ngModel)]="assigneeId">
+        @for (user of users; track user.id) { <option [ngValue]="user.id">{{ user.nome }}</option> }
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prioridade</label>
+      <select class="form-select" name="priority" [(ngModel)]="priority">
+        <option value="BAIXA">Baixa</option><option value="MEDIA">Media</option><option value="ALTA">Alta</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prazo</label>
+      <input type="date" class="form-control" name="deadLine" [(ngModel)]="deadLine" />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+  <button type="button" mdbRipple class="btn btn-primary" [disabled]="saving" (click)="save()">{{ saving ? 'Salvando...' : 'Salvar tarefa' }}</button>
+</div>

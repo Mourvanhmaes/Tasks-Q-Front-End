@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h5 class="modal-title">Adicionar Tarefa ao Projeto</h5>
+  <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
+</div>
+<div class="modal-body">
+  <mdb-form-control class="mb-3">
+    <input mdbInput type="text" id="tarefaProjetoTitulo" class="form-control" />
+    <label mdbLabel class="form-label" for="tarefaProjetoTitulo">Titulo da tarefa</label>
+  </mdb-form-control>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Responsavel</label>
+      <select class="form-select">
+        <option>Mariana Ferreira</option>
+        <option selected>Rafael Andrade</option>
+        <option>Julia Santos</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label-select">Prioridade</label>
+      <select class="form-select">
+        <option>Baixa</option>
+        <option selected>Media</option>
+        <option>Alta</option>
+        <option>Urgente</option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-1">
+    <label class="form-label-select">Prazo</label>
+    <input type="date" class="form-control" />
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
+  <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Adicionar tarefa</button>
+</div>
