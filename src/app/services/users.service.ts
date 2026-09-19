@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {CargoApiResponse, UserApiResponse, UserCreateRequest, UserUpdateRequest, Users} from '../models/users';
+import {CargoApiResponse, CargoCreateRequest, UserApiResponse, UserCreateRequest, UserUpdateRequest, Users} from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,10 @@ buscarPorId(id: number): Observable<UserApiResponse> {
 
 listarCargos(): Observable<CargoApiResponse[]> {
   return this.http.get<CargoApiResponse[]>(this.cargosUrl);
+}
+
+criarCargo(dados: CargoCreateRequest): Observable<CargoApiResponse> {
+  return this.http.post<CargoApiResponse>(this.cargosUrl, dados);
 }
 
 cadastrar(dados: UserCreateRequest): Observable<UserApiResponse> {

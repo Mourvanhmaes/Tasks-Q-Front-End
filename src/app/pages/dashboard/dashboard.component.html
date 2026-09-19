@@ -6,7 +6,7 @@
          ============================================================ -->
     <!-- MOCK INICIO: nome do usuario — remover quando existir login/sessao real -->
     <header class="dashboard-header">
-      <h1 class="dashboard-welcome">Seja bem-vindo, Mariana!</h1>
+      <h1 class="dashboard-welcome">Seja bem-vindo, {{ userName }}!</h1>
       <p class="dashboard-welcome__subtitle">
         Acompanhe aqui o seu trabalho e veja como seus resultados estão evoluindo! 🚀
       </p>
@@ -42,7 +42,7 @@
             <h2 class="panel__title">Meus Projetos</h2>
             <p class="panel__subtitle">Acompanhe o andamento dos seus projetos e tarefas.</p>
           </div>
-          <button type="button" class="panel__link">
+          <button type="button" class="panel__link" (click)="goToProjects()">
             Ver todos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </button>
         </div>
@@ -73,9 +73,9 @@
                 </span>
                 Ranking de Colaboradores
               </h2>
-              <p class="panel__subtitle">Colaboradores com mais tarefas concluídas.</p>
+              <p class="panel__subtitle">Colaboradores com mais XP.</p>
             </div>
-            <button type="button" class="panel__link">
+            <button type="button" class="panel__link" (click)="goToXp()">
               Ver todos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </button>
           </div>

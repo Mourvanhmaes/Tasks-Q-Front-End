@@ -20,6 +20,7 @@ export class UserFormModalComponent implements OnInit {
   email = '';
   senha = '';
   cargoId: number | null = null;
+  nomeNovoCargo = '';
   status: 'ATIVO' | 'INATIVO' = 'ATIVO';
 
   cargos: CargoApiResponse[] = [];
@@ -60,7 +61,6 @@ export class UserFormModalComponent implements OnInit {
 salvar(): void {
   const nome = this.nome.trim();
   const email = this.email.trim();
-  const cargoId = this.cargoId;
 
   if (nome.length < 3) {
     this.erro = 'O nome deve possuir pelo menos 3 caracteres.';
@@ -74,11 +74,6 @@ salvar(): void {
     return;
   }
 
-  if (cargoId === null) {
-    this.erro = 'Selecione um cargo.';
-    return;
-  }
-
   if (!this.modoEdicao && this.senha.length < 8) {
     this.erro = 'A senha deve possuir pelo menos 8 caracteres.';
     return;
@@ -89,23 +84,43 @@ salvar(): void {
     return;
   }
 
-  this.salvando = true;
-  this.erro = '';
-
   const dados = {
     nome,
     email,
-    cargoId,
     status: this.status,
     urlAvatar: null
   };
 
+  if (this.cargoId !== null && this.cargoId !== -1) {
+    this.salvarUsuario(this.cargoId, dados);
+    return;
+  }
+
+  if (!this.modoEdicao && this.nomeNovoCargo.trim().length >= 2) {
+    this.salvando = true;
+    this.erro = '';
+    this.usersService.criarCargo({ nome: this.nomeNovoCargo.trim() }).subscribe({
+      next: cargo => this.salvarUsuario(cargo.id, dados),
+      error: () => {
+        this.salvando = false;
+        this.erro = 'Não foi possível criar o cargo.';
+      }
+    });
+    return;
+  }
+
+  this.erro = this.cargoId === -1 || this.cargos.length === 0
+    ? 'Informe o nome do novo cargo.'
+    : 'Selecione um cargo.';
+}
+
+private salvarUsuario(cargoId: number, dados: { nome: string; email: string; status: 'ATIVO' | 'INATIVO'; urlAvatar: null }): void {
+  this.salvando = true;
+  this.erro = '';
+
   const requisicao = this.usuario
-    ? this.usersService.atualizar(this.usuario.id, dados)
-    : this.usersService.cadastrar({
-        ...dados,
-        senha: this.senha
-      });
+    ? this.usersService.atualizar(this.usuario.id, { ...dados, cargoId })
+    : this.usersService.cadastrar({ ...dados, cargoId, senha: this.senha });
 
   requisicao.subscribe({
     next: usuario => this.modalRef.close(usuario),
