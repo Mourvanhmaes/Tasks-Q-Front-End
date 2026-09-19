@@ -8,6 +8,7 @@ export interface Project {
 // MOCK: interface criada apenas para tipar o card de /projects. Progresso,
 // equipe, total de tarefas e prazo ainda nao existem em Project nem no service.
 export interface ProjectCardData {
+  id?: number;
   name: string;
   description: string;
   statusLabel: string;

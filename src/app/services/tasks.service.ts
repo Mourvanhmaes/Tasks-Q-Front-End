@@ -127,6 +127,10 @@ export class TasksService {
 
   readonly tasks = this._tasks.asReadonly();
 
+  replaceTasks(tasks: Task[]): void {
+    this._tasks.set(tasks);
+  }
+
   readonly columns = computed<BoardColumn[]>(() =>
     TASK_STATUSES.map(({ status, title }) => ({
       status,

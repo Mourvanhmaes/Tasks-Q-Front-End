@@ -1,28 +1,26 @@
 <div class="modal-header">
-  <h5 class="modal-title">Novo Projeto</h5>
+  <h5 class="modal-title">{{ project ? 'Editar projeto' : 'Novo Projeto' }}</h5>
   <button type="button" mdbRipple class="btn-close btn-close-white" (click)="modalRef.close()" aria-label="Fechar"></button>
 </div>
 <div class="modal-body">
   <mdb-form-control class="mb-3">
-    <input mdbInput type="text" id="projetoNome" class="form-control" />
+    <input mdbInput type="text" id="projetoNome" name="name" class="form-control" [(ngModel)]="name" />
     <label mdbLabel class="form-label" for="projetoNome">Titulo do projeto</label>
   </mdb-form-control>
   <mdb-form-control class="mb-3">
-    <textarea mdbInput id="projetoDescricao" class="form-control" rows="3"></textarea>
+    <textarea mdbInput id="projetoDescricao" name="description" class="form-control" rows="3" [(ngModel)]="description"></textarea>
     <label mdbLabel class="form-label" for="projetoDescricao">Descricao</label>
   </mdb-form-control>
   <div class="row">
     <div class="col-md-6 mb-3">
       <label class="form-label-select">Responsavel</label>
-      <select class="form-select">
-        <option selected>Mariana Ferreira</option>
-        <option>Rafael Andrade</option>
-        <option>Gustavo Cardoso</option>
+      <select class="form-select" name="ownerId" [(ngModel)]="ownerId">
+        @for (user of users; track user.id) { <option [ngValue]="user.id">{{ user.nome }}</option> }
       </select>
     </div>
     <div class="col-md-6 mb-3">
       <label class="form-label-select">Prazo</label>
-      <input type="date" class="form-control" />
+      <input type="date" class="form-control" name="deadLine" [(ngModel)]="deadLine" />
     </div>
   </div>
 
@@ -53,7 +51,7 @@
       <span class="project-form__danger-zone-title">Excluir projeto definitivamente</span>
       <span class="project-form__danger-zone-hint">Disponivel somente depois que o projeto for arquivado.</span>
     </div>
-    <button type="button" mdbRipple class="btn btn-danger btn-sm" disabled (click)="openDeleteConfirm()">
+    <button type="button" mdbRipple class="btn btn-danger btn-sm" [disabled]="!project" (click)="openDeleteConfirm()">
       <i class="fa-solid fa-trash me-2"></i>Excluir
     </button>
   </div>
@@ -64,6 +62,6 @@
   </button>
   <div class="d-flex gap-2">
     <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
-    <button type="button" mdbRipple class="btn btn-primary" (click)="modalRef.close()">Salvar projeto</button>
+    <button type="button" mdbRipple class="btn btn-primary" [disabled]="saving" (click)="save()">{{ saving ? 'Salvando...' : 'Salvar projeto' }}</button>
   </div>
 </div>

@@ -76,7 +76,7 @@
       <div class="task-modal__section-header">
         <i class="fa-solid fa-align-left"></i>
         <h3 class="task-modal__section-title">Descricao</h3>
-        <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm ms-auto">Editar</button>
+        <button type="button" mdbRipple class="btn btn-secondary-ghost btn-sm ms-auto" (click)="edit(task)">Editar</button>
       </div>
       <p class="task-modal__description">{{ task.description }}</p>
     </div>
@@ -99,7 +99,7 @@
   </div>
 
   <div class="modal-footer justify-content-between">
-    <button type="button" mdbRipple class="btn btn-danger" (click)="modalRef.close('delete')">
+    <button type="button" mdbRipple class="btn btn-danger" (click)="delete(task)">
       <i class="fa-solid fa-trash me-2"></i>Excluir tarefa
     </button>
 

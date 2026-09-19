@@ -14,7 +14,7 @@ export class ProjectCardComponent {
 
   @Input() project!: ProjectResponse;
 
-  @Output() edit = new EventEmitter<void>();
+  @Output() edit = new EventEmitter<ProjectCardData>();
 
   @Output() team = new EventEmitter<void>();
 }

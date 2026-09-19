@@ -7,7 +7,7 @@
     <span class="badge badge--{{ project.status }}">{{ project.status }}</span>
   </div>
   <div class="project-card__menu">
-    <button type="button" mdbRipple class="btn-icon" (click)="edit.emit()" title="Editar"><i class="fa-solid fa-pen"></i></button>
+    <button type="button" mdbRipple class="btn-icon" (click)="edit.emit(project)" title="Editar"><i class="fa-solid fa-pen"></i></button>
   </div>
 </div>
 <p class="project-card__description">{{ project.description }}</p>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AppShellComponent } from '../../components/layout/app-shell.component';
@@ -7,8 +7,9 @@ import { ProjectCardComponent } from '../../components/projects/project-card/pro
 import { ProjectFormModalComponent } from '../../components/modals/project-form-modal/project-form-modal.component';
 import { AssignUsersModalComponent } from '../../components/modals/assign-users-modal/assign-users-modal.component';
 import { ProjectCardData } from '../../models/project';
-import { ProjectService } from '../../services/project.service';
-import { ProjectResponse } from '../../models/project/project-response';
+import { ProjectApi } from '../../models/project-api';
+import { ProjectApiService } from '../../services/project-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projects',
@@ -16,22 +17,18 @@ import { ProjectResponse } from '../../models/project/project-response';
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
-
-export class ProjectsComponent {
-
-  projects: ProjectResponse[] = [];
-
-    constructor(
-        private modalService: MdbModalService,
-        private projectService: ProjectService
-      ) {
-      this.loadProjects();
-    }
-
-  openProjectModal(): void {
-    this.modalService.open(ProjectFormModalComponent, {
+export class ProjectsComponent implements OnInit {
+  projects: ProjectCardData[] = [];
+  private apiProjects: ProjectApi[] = [];
+  constructor(private modalService: MdbModalService, private readonly projectApi: ProjectApiService) {}
+  ngOnInit(): void { this.load(); }
+  openProjectModal(card?: ProjectCardData): void {
+    const project = card ? this.apiProjects.find(item => item.id === card.id) : undefined;
+    const modal = this.modalService.open(ProjectFormModalComponent, {
       modalClass: 'modal-dialog-centered modal-lg'
+      , data: { project }
     });
+    modal.onClose.subscribe(result => { if (result) this.load(); });
   }
 
   openAssignUsersModal(): void {
@@ -40,14 +37,14 @@ export class ProjectsComponent {
     });
   }
 
-  loadProjects(): void {
-    this.projectService.findall().subscribe({
-      next: (projects) => {
-        this.projects = projects;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-  });
-}
+  private load(): void {
+    this.projectApi.list().subscribe({
+      next: projects => { this.apiProjects = projects; this.projects = projects.map(project => this.toCard(project)); },
+      error: () => Swal.fire('Erro', 'Não foi possível carregar os projetos.', 'error')
+    });
+  }
+  private toCard(project: ProjectApi): ProjectCardData {
+    const completed = project.status === 'CONCLUIDO'; const delayed = project.status === 'ATRASADA';
+    return { id: project.id, name: project.name, description: project.description, statusLabel: completed ? 'Concluído' : delayed ? 'Atrasado' : project.status === 'ANDAMENTO' ? 'Em andamento' : 'Pendente', statusModifier: completed ? 'success' : delayed ? 'danger' : project.status === 'ANDAMENTO' ? 'info' : 'neutral', progress: completed ? '100%' : '0%', percentLabel: completed ? '100%' : '0%', progressModifier: completed ? 'success' : delayed ? 'danger' : 'neutral', avatars: [], tasksLabel: 'Tarefas disponíveis na tela de tarefas', deadlineLabel: project.deadLine, deadlineOverdue: delayed };
+  }
 }
