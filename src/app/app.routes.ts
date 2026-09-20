@@ -5,6 +5,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserlistComponent } from './pages/users/userlist/userlist.component';
 import { TasklistComponent } from './pages/tasks/tasklist/tasklist.component';
 import { TaskdetailsComponent } from './components/tasks/taskdetails/taskdetails.component'
+import { ProjectdetailsComponent } from './pages/projects/projectdetails/projectdetails.component';
+import { ProjectlistComponent } from './pages/projects/projectlist/projectlist.component';
 
 export const routes: Routes = [
   {path: "", redirectTo: "login", pathMatch: "full"},
@@ -15,6 +17,8 @@ export const routes: Routes = [
     {path: "users", component: UserlistComponent},
     {path: "tasks", component: TasklistComponent},
     {path: "tasks/:id", component: TaskdetailsComponent},
+    {path: "project", component: ProjectlistComponent}
+  
 
   ]}
 ];

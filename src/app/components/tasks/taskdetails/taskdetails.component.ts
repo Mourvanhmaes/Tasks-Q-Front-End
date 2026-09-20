@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { Tasks } from '../../../models/tasks';
 import { Priority } from '../../../models/enums/priority.enum';
+import { TaskRequest } from '../../../models/task-resquest';
 @Component({
   selector: 'app-taskdetails',
   imports: [MdbFormsModule, FormsModule],
@@ -10,27 +10,21 @@ import { Priority } from '../../../models/enums/priority.enum';
   styleUrl: './taskdetails.component.scss'
 })
 export class TaskdetailsComponent {
-  @Input() task!: Tasks;
+  @Input() task!: TaskRequest;
   @Output() retorno = new EventEmitter<
   {
-    task: Tasks;
+    task: TaskRequest;
     newtask: boolean;
   }>();
 
   Priority = Priority; 
-  copyTask!: Tasks;
+  copyTask!: TaskRequest;
   newtask = false;
 
-  ngOnInit(){
-    if(Object.keys(this.task).length === 0){
-      this.newtask = true;
-      this.copyTask = new Tasks();
-    }
-    else{
-      this.copyTask = {...this.task}
-    }
-
-  }
+ngOnInit(){
+  this.copyTask = { ...this.task };
+  this.newtask = !this.task.id;
+}
 
 
 

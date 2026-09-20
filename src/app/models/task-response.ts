@@ -1,7 +1,7 @@
-import { Priority } from './enums/priority.enum';
-import { Status } from './enums/status.enum';
+import { Priority } from '../models/enums/priority.enum';
+import { Status } from '../models/enums/status.enum';
 
-export interface Tasks {
+export interface TaskResponse {
   id: number;
   title: string;
   description: string;
@@ -10,6 +10,7 @@ export interface Tasks {
   assigneeId: number;
   creatorId: number;
   deadLine: string;
+  createdAt: string;
+  updatedAt: string;
   completedAt: string | null;
-  projectId: number | null;
 }

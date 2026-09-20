@@ -1,6 +1,6 @@
 export enum Status {
   ANDAMENTO = 'ANDAMENTO',
-  ATRASO = 'ATRASO',
+  ATRASADA = 'ATRASADA',
   CONCLUIDO = 'CONCLUIDO',
   PENDENTE = 'PENDENTE'
 }
