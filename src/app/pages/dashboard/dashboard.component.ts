@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     this.loadHolidays();
   }
 
-  goToProjects(): void { this.router.navigate(['/projects']); }
+  goToProjects(): void { this.router.navigate(['/admin/projects']); }
   goToXp(): void { this.router.navigate(['/xp']); }
 
   private loadTasks(): void {

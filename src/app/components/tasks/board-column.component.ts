@@ -1,13 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BoardColumn } from '../../models/task';
 
-/**
- * Coluna do quadro de tarefas: cabecalho (ponto, titulo, contador) e a
- * lista, que recebe os cards por <ng-content>.
- *
- * Quem usa escreve as classes no host:
- *   <app-board-column class="board-column board-column--doing" ...>
- */
+
 @Component({
   selector: 'app-board-column',
   imports: [],
