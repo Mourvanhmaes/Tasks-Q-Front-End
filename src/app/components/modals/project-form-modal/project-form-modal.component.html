@@ -24,27 +24,6 @@
     </div>
   </div>
 
-  <label class="form-label-select">Membros</label>
-  <mdb-form-control class="mb-2">
-    <input mdbInput type="text" id="projetoBuscaMembro" class="form-control" list="projetoMembrosSugestoes" autocomplete="off" />
-    <label mdbLabel class="form-label" for="projetoBuscaMembro">Buscar membro pelo nome</label>
-  </mdb-form-control>
-  <datalist id="projetoMembrosSugestoes">
-    <option value="Mariana Ferreira"></option>
-    <option value="Rafael Andrade"></option>
-    <option value="Julia Santos"></option>
-    <option value="Thiago Pereira"></option>
-    <option value="Gustavo Cardoso"></option>
-  </datalist>
-
-  <select class="form-select" multiple size="4">
-    <option selected>Mariana Ferreira</option>
-    <option>Rafael Andrade</option>
-    <option>Julia Santos</option>
-    <option>Thiago Pereira</option>
-    <option>Gustavo Cardoso</option>
-  </select>
-  <p class="form-hint">Digite acima para ver sugestoes de nomes e depois marque o(s) membro(s) na lista. Segure Ctrl (ou Cmd no Mac) para selecionar mais de um.</p>
 
   <div class="project-form__danger-zone">
     <div>
@@ -57,9 +36,7 @@
   </div>
 </div>
 <div class="modal-footer justify-content-between">
-  <button type="button" mdbRipple class="btn btn-outline-warning" (click)="openArchiveConfirm()">
-    <i class="fa-solid fa-box-archive me-2"></i>Arquivar projeto
-  </button>
+  <div></div>
   <div class="d-flex gap-2">
     <button type="button" mdbRipple class="btn btn-secondary-ghost" (click)="modalRef.close()">Cancelar</button>
     <button type="button" mdbRipple class="btn btn-primary" [disabled]="saving" (click)="save()">{{ saving ? 'Salvando...' : 'Salvar projeto' }}</button>

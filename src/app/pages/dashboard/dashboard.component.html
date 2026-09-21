@@ -1,22 +1,14 @@
 <app-shell>
   <div class="dashboard-page">
 
-    <!-- ============================================================
-         Cabecalho de boas-vindas
-         ============================================================ -->
-    <!-- MOCK INICIO: nome do usuario — remover quando existir login/sessao real -->
     <header class="dashboard-header">
       <h1 class="dashboard-welcome">Seja bem-vindo, {{ userName }}!</h1>
       <p class="dashboard-welcome__subtitle">
         Acompanhe aqui o seu trabalho e veja como seus resultados estão evoluindo! 🚀
       </p>
     </header>
-    <!-- MOCK FIM -->
 
-    <!-- ============================================================
-         Primeira linha — feriados, tarefas pendentes, projetos ativos
-         ============================================================ -->
-    <!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
+
     <section class="dashboard-stats-grid">
 
       <app-holidays-card
@@ -30,12 +22,8 @@
 
     </section>
 
-    <!-- ============================================================
-         Segunda linha — meus projetos + coluna lateral
-         ============================================================ -->
     <section class="dashboard-main-grid">
 
-      <!-- Coluna principal -->
       <section class="panel projects-section">
         <div class="panel__head">
           <div class="panel__head-text">
@@ -54,7 +42,6 @@
         </div>
       </section>
 
-      <!-- Coluna lateral -->
       <div class="dashboard-side-column">
 
         <app-tasks-summary
@@ -75,9 +62,6 @@
               </h2>
               <p class="panel__subtitle">Colaboradores com mais XP.</p>
             </div>
-            <button type="button" class="panel__link" (click)="goToXp()">
-              Ver todos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </div>
 
           <ul class="ranking-list" app-ranking-list [entries]="ranking"></ul>

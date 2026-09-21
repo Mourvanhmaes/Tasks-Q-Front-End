@@ -4,7 +4,7 @@
     <h3 class="project-card__title">
       <a [routerLink]="['/tasks']" [queryParams]="{ projeto: project.name }">{{ project.name }}</a>
     </h3>
-    <span class="badge badge--{{ project.status }}">{{ project.status }}</span>
+    <span class="badge badge--{{ project.statusModifier }}">{{ project.statusLabel }} </span>
   </div>
   <div class="project-card__menu">
     <button type="button" mdbRipple class="btn-icon" (click)="edit.emit(project)" title="Editar"><i class="fa-solid fa-pen"></i></button>
@@ -13,9 +13,16 @@
 <p class="project-card__description">{{ project.description }}</p>
 
 <div class="project-card__footer">
-  <span class="project-card__deadline" [class.project-card__deadline--overdue]="project.deadLine">
+  <!-- <span class="project-card__deadline" [class.project-card__deadline--overdue]="project.deadLine">
     <i class="fa-solid fa-calendar-days me-1"></i>{{ project.deadLine}}
-  </span>
+  </span>-->
+  <span
+  class="project-card__deadline"
+  [class.project-card__deadline--overdue]="project.deadlineOverdue"
+>
+  <i class="fa-solid fa-calendar-days me-1"></i>
+  {{ project.deadlineLabel }}
+</span>
 </div>
 
 <div class="project-card__actions">
