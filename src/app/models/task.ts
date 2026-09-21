@@ -1,6 +1,14 @@
+//export type TaskStatus = 'todo' | 'doing' | 'done' | 'blocked';
+
+//export type TaskPriority = 'baixa' | 'media' | 'alta' | 'urgente';
+
+// task-status.ts (ou onde já está TaskStatus)
 export type TaskStatus = 'todo' | 'doing' | 'done' | 'blocked';
+export type TaskStatusApi = 'PENDENTE' | 'ANDAMENTO' | 'CONCLUIDO' | 'ATRASADA'; // backend
 
 export type TaskPriority = 'baixa' | 'media' | 'alta' | 'urgente';
+export type TaskPriorityApi = 'BAIXA' | 'MEDIA' | 'ALTA';           // backend
+
 
 export interface Task {
   id: string;
@@ -44,3 +52,9 @@ export const TASK_STATUSES: StatusOption[] = [
   { status: 'done', title: 'Concluido' },
   { status: 'blocked', title: 'Bloqueado' }
 ];
+
+export type TaskRequestStatus =
+  | 'PENDENTE'
+  | 'ANDAMENTO'
+  | 'CONCLUIDO'
+  | 'ATRASADA';

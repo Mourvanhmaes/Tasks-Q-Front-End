@@ -16,6 +16,7 @@ import { UsersService } from '../../services/users.service';
 import { TaskApiService } from '../../services/task-api.service';
 import { TaskApi, TaskProject, TaskUser } from '../../models/task-api';
 import Swal from 'sweetalert2';
+import { TaskRequest } from '../../models/task/task-request';
 
 @Component({
   selector: 'app-tasks',
@@ -101,7 +102,13 @@ export class TasksComponent implements OnInit {
   }
 
   move(task: Task, status: TaskStatus): void {
-    const request = { id: Number(task.id), title: task.title, description: task.description, status: status === 'todo' ? 'PENDENTE' : status === 'doing' ? 'ANDAMENTO' : status === 'done' ? 'CONCLUIDO' : 'ATRASADA', priority: task.priority.toUpperCase() as 'BAIXA' | 'MEDIA' | 'ALTA', assigneeId: Number(task.assigneeId), deadLine: task.dueLabel, projectId: Number(task.projectId) };
+    const request: TaskRequest = { id: Number(task.id), 
+      title: task.title, description: task.description, 
+      status: status === 'todo' ? 'PENDENTE' : status === 'doing' ? 'ANDAMENTO' : status === 'done' ? 'CONCLUIDO' : 'ATRASADA',
+      priority: task.priority.toUpperCase() as 'BAIXA' | 'MEDIA' | 'ALTA',
+      assigneeId: Number(task.assigneeId),
+      deadLine: task.dueLabel,
+      projectId: Number(task.projectId) };
     this.taskApi.update(request).subscribe({ next: () => this.loadTasks(), error: () => Swal.fire('Erro', 'Não foi possível atualizar a tarefa.', 'error') });
   }
 
