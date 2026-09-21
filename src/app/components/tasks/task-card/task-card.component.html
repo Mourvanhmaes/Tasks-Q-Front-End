@@ -10,7 +10,7 @@
 
 @if (task.concluded) {
   <span class="badge badge--success card__status-tag">
-    <i class="fa-solid fa-circle-check"></i>Concluida por {{ concludedByName }}
+    <i class="fa-solid fa-circle-check"></i>Concluida por {{ concludedByName }} 
   </span>
 } @else if (task.status === 'done') {
   <span class="badge badge--warning card__status-tag">
