@@ -10,41 +10,6 @@
     </button>
   </app-page-header>
 
-  <div class="page-toolbar">
-    <mdb-form-control class="page-toolbar__search">
-      <input mdbInput type="text" id="buscaTarefa" class="form-control" />
-      <label mdbLabel class="form-label" for="buscaTarefa">Buscar tarefa por titulo</label>
-    </mdb-form-control>
-
-    <!-- MOCK INICIO: filtros de projeto e prioridade — remover quando existir busca/filtro no service -->
-    <select class="form-select page-toolbar__select" aria-label="Filtrar por projeto">
-      <option selected>Minhas Tarefas</option>
-      <option>Todos os projetos</option>
-      <option>Portal do Cliente</option>
-      <option>App Mobile Cabanos</option>
-      <option>Site Institucional</option>
-      <option>Campanha de Doacao Natalina</option>
-    </select>
-    <select class="form-select page-toolbar__select" aria-label="Filtrar por prioridade">
-      <option selected>Todas as prioridades</option>
-      <option>Urgente</option>
-      <option>Alta</option>
-      <option>Media</option>
-      <option>Baixa</option>
-    </select>
-    <!-- MOCK FIM -->
-
-    <!-- MOCK INICIO: troca do usuario da sessao — remover quando existir login/autenticacao -->
-    <div class="page-toolbar__session">
-      <label class="page-toolbar__session-label" for="usuarioSessao">Visualizando como</label>
-      <select id="usuarioSessao" class="form-select page-toolbar__select" (change)="changeCurrentUser($event)">
-        @for (user of users; track user.id) {
-          <option [value]="user.id" [selected]="user.id === currentUser().id">{{ user.name }} - {{ user.roleLabel }}</option>
-        }
-      </select>
-    </div>
-    <!-- MOCK FIM -->
-  </div>
 
   <!-- ESTRUTURA DEFINITIVA: manter. Trocar apenas o binding quando a API existir. -->
   <div class="board">

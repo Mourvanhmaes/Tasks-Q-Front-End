@@ -51,8 +51,6 @@ export class ProjectFormModalComponent implements OnInit {
     });
   }
 
-  // Passo 2: exclusao definitiva. So deve ficar habilitado quando o
-  // projeto ja estiver arquivado (o botao abaixo comeca desabilitado).
   openDeleteConfirm(): void {
     const confirmRef = this.modalService.open(ConfirmModalComponent, {
       modalClass: 'modal-dialog-centered modal-sm',
