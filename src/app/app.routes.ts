@@ -17,27 +17,32 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'users',
-    component: UsersComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-  {
-    path: 'tasks',
-    component: TasksComponent
-  },
-  {
-    path: 'profile/:id',
-    component: ProfileComponent
-  },
-  {
-    path: 'xp',
-    component: XpComponent
-  },
-  {
-    path: 'projects',
-    component: ProjectsComponent
+    path: 'admin',
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
+      {
+        path: 'tasks',
+        component: TasksComponent
+      },
+      {
+        path: 'projects',
+        component: ProjectsComponent
+      },
+      {
+        path: 'profile/:id',
+        component: ProfileComponent
+      },
+      {
+        path: 'xp',
+        component: XpComponent
+      }
+    ]
   }
 ];

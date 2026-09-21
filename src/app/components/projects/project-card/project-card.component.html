@@ -2,7 +2,7 @@
 <div class="project-card__header">
   <div>
     <h3 class="project-card__title">
-      <a [routerLink]="['/tasks']" [queryParams]="{ projeto: project.name }">{{ project.name }}</a>
+      <a [routerLink]="['/admin/tasks']" [queryParams]="{ projeto: project.name }">{{ project.name }}</a>
     </h3>
     <span class="badge badge--{{ project.statusModifier }}">{{ project.statusLabel }} </span>
   </div>
