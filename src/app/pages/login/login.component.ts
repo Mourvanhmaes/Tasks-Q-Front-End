@@ -24,7 +24,7 @@ export class LoginComponent {
     }
 
     this.erro = '';
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/admin/dashboard']);
   }
 
 }
