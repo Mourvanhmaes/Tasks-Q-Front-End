@@ -73,7 +73,6 @@ export class TasksComponent implements OnInit {
     return task.concludedById ? this.usersService.getById(task.concludedById)?.name ?? '' : '';
   }
 
-  /** Mover a tarefa entre as colunas e liberado para admin e membros. */
   moveOptions(task: Task): MoveOption[] {
     if (task.concluded) {
       return [];
@@ -96,7 +95,6 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  /** Concluir de fato: so o admin ou o responsavel pelo projeto. */
   canConclude(task: Task): boolean {
     return this.tasksService.canConclude(task, this.currentUser());
   }
